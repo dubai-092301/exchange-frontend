@@ -8,7 +8,7 @@ const Home = () => {
 
     useEffect(() => {
         const requestHomeDetails = () => {
-            axios.get(`http://3.106.236.99:8080/api/test/hello`, {
+            axios.get(`http://exchange-btc.in:8080/api/test/hello`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('authToken')}`
                 }

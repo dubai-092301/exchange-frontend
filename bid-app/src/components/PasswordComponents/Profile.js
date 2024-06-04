@@ -34,7 +34,7 @@ export default function Profile() {
 
   useEffect(() => {
     // Get phone number
-    fetch('http://3.106.236.99:8080/getPhoneNumber', {
+    fetch('http://exchange-btc.in:8080/getPhoneNumber', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`

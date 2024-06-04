@@ -9,7 +9,7 @@ export default function ViewTransactions() {
 
     useEffect(() => {
         // Fetch data from Spring Boot backend
-        fetch('http://3.106.236.99:8080/getBtcTransactionDetails', {
+        fetch('http://exchange-btc.in:8080/getBtcTransactionDetails', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
