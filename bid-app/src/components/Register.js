@@ -28,7 +28,7 @@ const Register = () => {
     };
 
     const requestOTP = () => {
-        axios.get(`http://localhost:8080/api/client/auth/requestOtp/${user.phoneNumber}`)
+        axios.get(`http://3.106.236.99:8080/api/client/auth/requestOtp/${user.phoneNumber}`)
             .then(response => {
                 alert('OTP sent to your phone.');
             })
@@ -38,7 +38,7 @@ const Register = () => {
     const registerUser = (e) => {
         e.preventDefault(); // Prevent form from reloading the page
 
-        axios.post('http://localhost:8080/api/client/auth/register/', {
+        axios.post('http://3.106.236.99:8080/api/client/auth/register/', {
             name: user.name,
             password: user.password,
             phoneNumber: user.phoneNumber,

@@ -12,7 +12,7 @@ export default function BuyBtcCustomer() {
   const [totalValue, setTotalValue] = useState(null);
 
   const fetchLatestBtcRate = () => {
-    fetch('http://localhost:8080/getCurrentBtcRate', {
+    fetch('http://3.106.236.99:8080/getCurrentBtcRate', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -31,7 +31,7 @@ export default function BuyBtcCustomer() {
 
   useEffect(() => {
     // Fetch available BTC quantity when the component mounts
-    fetch('http://localhost:8080/getAvailableBtcQty', {
+    fetch('http://3.106.236.99:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -92,7 +92,7 @@ export default function BuyBtcCustomer() {
       formData.append('utrNumber', utrNumber);
       formData.append('paymentScreenshot', paymentScreenshot);
 
-      fetch('http://localhost:8080/saveBtcRecords', {
+      fetch('http://3.106.236.99:8080/saveBtcRecords', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`

@@ -12,7 +12,7 @@ export default function WithdrawBtc() {
 
   useEffect(() => {
     // Fetch available BTC quantity when the component mounts
-    fetch('http://localhost:8080/getAvailableBtcQty', {
+    fetch('http://3.106.236.99:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -63,7 +63,7 @@ export default function WithdrawBtc() {
   const handleWithdraw = () => {
     if (isWithdrawButtonEnabled()) {
       // Make API call to save withdrawal details
-      fetch('http://localhost:8080/saveBtcWithdrawRecords', {
+      fetch('http://3.106.236.99:8080/saveBtcWithdrawRecords', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
