@@ -5,8 +5,6 @@ import Scanner from './Scanner';
 export default function BuyBtcCustomer() {
   const [quantity, setQuantity] = useState(0);
   const [utrNumber, setUtrNumber] = useState('');
-  const [paymentScreenshot, setPaymentScreenshot] = useState(null);
-  const [isImageValid, setIsImageValid] = useState(true);
   const [btcQty, setBtcQty] = useState(null);
   const [btcRate, setBtcRate] = useState(null);
   const [totalValue, setTotalValue] = useState(null);
@@ -63,23 +61,8 @@ export default function BuyBtcCustomer() {
     setUtrNumber(event.target.value);
   };
 
-  const handlePaymentScreenshotChange = (event) => {
-    const file = event.target.files[0];
-    const validExtensions = ['image/png', 'image/jpeg', 'image/jpg', 'image/heic', 'image/svg'];
-    const maxSize = 5 * 1024 * 1024; // 5MB
-
-    if (file && validExtensions.includes(file.type) && file.size <= maxSize) {
-      setPaymentScreenshot(file);
-      setIsImageValid(true);
-    } else {
-      setPaymentScreenshot(null);
-      setIsImageValid(false);
-      alert('Invalid format or file size exceeds 5MB. Please upload a valid image.');
-    }
-  };
-
   const isFormValid = () => {
-    return quantity >= 100 && utrNumber.trim() !== '' && isImageValid;
+    return quantity >= 100 && utrNumber.trim() !== '';
   };
 
   const handleSubmit = () => {
@@ -87,9 +70,6 @@ export default function BuyBtcCustomer() {
       const formData = new FormData();
       formData.append('quantity', quantity);
       formData.append('utrNumber', utrNumber);
-      if (paymentScreenshot) {
-        formData.append('paymentScreenshot', paymentScreenshot);
-      }
 
       fetch('http://exchange-btc.in:8080/saveBtcRecords', {
         method: 'POST',
@@ -160,15 +140,6 @@ export default function BuyBtcCustomer() {
                                 value={utrNumber}
                                 onChange={handleUtrNumberChange}
                               ></input>
-                            </div>
-                            <div className="d-flex md-7 flex-row pb-3">
-                              <div className="col-md-4 p-2">Payment Screenshot :</div>
-                              <input
-                                className="form-control"
-                                type="file"
-                                id="formFile"
-                                onChange={handlePaymentScreenshotChange}
-                              />
                             </div>
                             <div className="d-flex flex-row pb-3">
                               <div className="col-md-4 p-2">Quantity <span style={{ color: "red" }}>*</span> :</div>

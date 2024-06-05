@@ -72,7 +72,6 @@ export default function Navbar() {
                 <ul className="dropdown-menu dropdown-menu-white" style={{ backgroundColor: '#ffffcc', left: '-75px' }}>
                   {isCashierOrAdmin && (
                     <>
-                      <li><Link className="dropdown-item" style={{ color: 'black' }} to="/upload-btc-qr-code">Upload QR</Link></li>
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/buy-btc-approval-reject">Approve</Link></li>
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/configure-btc-rate">Configure BTC</Link></li>
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/cashier-payment">Cashier Payment</Link></li>
