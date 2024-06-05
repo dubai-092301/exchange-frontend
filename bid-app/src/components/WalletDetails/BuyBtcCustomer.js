@@ -16,7 +16,7 @@ export default function BuyBtcCustomer() {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
-        'Content-Type': 'application/json', // Include any other headers you might need
+        'Content-Type': 'application/json',
       },
     })
       .then((response) => response.json())
@@ -30,7 +30,6 @@ export default function BuyBtcCustomer() {
   };
 
   useEffect(() => {
-    // Fetch available BTC quantity when the component mounts
     fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
@@ -45,12 +44,10 @@ export default function BuyBtcCustomer() {
         console.error('Error fetching BTC quantity:', error);
       });
 
-    // Fetch the latest BTC rate when the component mounts
     fetchLatestBtcRate();
   }, []);
 
   useEffect(() => {
-    // Calculate the total value whenever quantity or BTC rate changes
     if (quantity > 0 && btcRate) {
       setTotalValue(quantity * btcRate);
     } else {
@@ -82,7 +79,7 @@ export default function BuyBtcCustomer() {
   };
 
   const isFormValid = () => {
-    return quantity >= 100 && utrNumber.trim() !== '' && paymentScreenshot !== null && isImageValid;
+    return quantity >= 100 && utrNumber.trim() !== '' && isImageValid;
   };
 
   const handleSubmit = () => {
@@ -90,7 +87,9 @@ export default function BuyBtcCustomer() {
       const formData = new FormData();
       formData.append('quantity', quantity);
       formData.append('utrNumber', utrNumber);
-      formData.append('paymentScreenshot', paymentScreenshot);
+      if (paymentScreenshot) {
+        formData.append('paymentScreenshot', paymentScreenshot);
+      }
 
       fetch('http://exchange-btc.in:8080/saveBtcRecords', {
         method: 'POST',
@@ -100,10 +99,8 @@ export default function BuyBtcCustomer() {
         body: formData,
       }).then(response => {
         if (response.ok) {
-          // Handle success
           alert('Payment details submitted successfully.');
         } else {
-          // Handle error
           alert('Failed to submit payment details.');
         }
       }).catch(error => {
@@ -130,27 +127,8 @@ export default function BuyBtcCustomer() {
                         </h3>
                         <hr />
                         <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                          {/* Add to wallet details here */}
                           <Scanner />
                           <div className="accordion-body">
-                            {/* <h6>Account Details</h6>
-                            <hr />
-                            <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
-                              <div className="col-md-4 p-2">Account Number :</div>
-                              <div className="col-md-8 p-2">1234567890</div>
-                            </div>
-                            <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
-                              <div className="col-md-4 p-2">IFSC code :</div>
-                              <div className="col-md-8 p-2">XXXX000000</div>
-                            </div>
-                            <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
-                              <div className="col-md-4 p-2">Bank Name :</div>
-                              <div className="col-md-8 p-2">State Bank</div>
-                            </div>
-                            <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
-                              <div className="col-md-4 p-2">Account Name :</div>
-                              <div className="col-md-8 p-2">ABC DEF</div>
-                            </div> */}
                             <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
                               <div className="col-md-4 p-2">Minimum Quantity :</div>
                               <div className="col-md-8 p-2">100</div>
@@ -184,7 +162,7 @@ export default function BuyBtcCustomer() {
                               ></input>
                             </div>
                             <div className="d-flex md-7 flex-row pb-3">
-                              <div className="col-md-4 p-2">Payment Screenshot <span style={{ color: "red" }}>*</span> :</div>
+                              <div className="col-md-4 p-2">Payment Screenshot :</div>
                               <input
                                 className="form-control"
                                 type="file"
