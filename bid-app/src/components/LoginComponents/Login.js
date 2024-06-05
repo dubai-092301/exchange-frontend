@@ -33,6 +33,7 @@ const Login = () => {
                 } else {
                     localStorage.setItem('isAuthenticated', 'true');
                     localStorage.setItem('authToken', response.data.jwt);
+                    localStorage.setItem('roles', JSON.stringify(response.data.roles)); // Store roles here
                     window.location.href = "/rules";
                 }
             })
@@ -51,11 +52,27 @@ const Login = () => {
             <form onSubmit={loginUser}>
                 <div className="mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
-                    <input type="text" className="form-control" id="phoneNumber" name="phoneNumber" value={credentials.phoneNumber} onChange={handleChange} />
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="phoneNumber" 
+                        name="phoneNumber" 
+                        value={credentials.phoneNumber} 
+                        onChange={handleChange} 
+                        required
+                    />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={handleChange} />
+                    <input 
+                        type="password" 
+                        className="form-control" 
+                        id="password" 
+                        name="password" 
+                        value={credentials.password} 
+                        onChange={handleChange} 
+                        required
+                    />
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
             </form>

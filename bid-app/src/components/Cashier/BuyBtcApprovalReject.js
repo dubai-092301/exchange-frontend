@@ -9,7 +9,7 @@ export default function BuyBtcApprovalReject() {
 
   useEffect(() => {
     // Fetch data from Spring Boot backend
-    fetch('http://exchange-btc.in:8080/getApprovalRecords', {
+    fetch('http://localhost:8080/getApprovalRecords', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
       }
@@ -46,7 +46,7 @@ export default function BuyBtcApprovalReject() {
       return;
     }
 
-    fetch('http://exchange-btc.in:8080/approveOrRejectBtc', {
+    fetch('http://localhost:8080/approveOrRejectBtc', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,

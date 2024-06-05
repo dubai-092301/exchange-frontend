@@ -36,7 +36,7 @@ export default function CashierPayment() {
   };
 
   const fetchBankDetails = () => {
-    fetch(`http://exchange-btc.in:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
+    fetch(`http://localhost:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -57,7 +57,7 @@ export default function CashierPayment() {
 
   const handleSubmit = () => {
     if (isValid) {
-      fetch('http://exchange-btc.in:8080/cashierPayment', {
+      fetch('http://localhost:8080/cashierPayment', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -85,7 +85,7 @@ export default function CashierPayment() {
 
   useEffect(() => {
     // Fetch available BTC quantity when the component mounts
-    fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
+    fetch('http://localhost:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
