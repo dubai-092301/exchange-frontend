@@ -33,13 +33,29 @@ export default function ViewTransactions() {
     }
 
     const handleSearch = (e) => {
-        const query = e.target.value;
+        const query = e.target.value.toLowerCase();
         setSearchQuery(query);
-        const filtered = data.filter(item =>
-            item.columnToSearch.toLowerCase().includes(query.toLowerCase())
-        );
+        const filtered = data.filter(item => {
+            const utrNumber = item.utrNumber ? String(item.utrNumber).toLowerCase() : '';
+            const buyAmount = item.buyAmount ? String(item.buyAmount).toLowerCase() : '';
+            const withdrawAmount = item.withdrawAmount ? String(item.withdrawAmount).toLowerCase() : '';
+            const type = item.type ? String(item.type).toLowerCase() : '';
+            return utrNumber.includes(query) || buyAmount.includes(query) || withdrawAmount.includes(query) || type.includes(query);
+        });
         setFilteredData(filtered);
     };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+        const yyyy = date.getFullYear();
+        const hh = String(date.getHours()).padStart(2, '0');
+        const min = String(date.getMinutes()).padStart(2, '0');
+        const sec = String(date.getSeconds()).padStart(2, '0');
+      
+        return `${dd}-${mm}-${yyyy} ${hh}:${min}:${sec}`;
+      };
 
     const getStatusMessage = (isApproved, isRejected) => {
         if (isApproved === true || isApproved === 1) {
@@ -66,8 +82,9 @@ export default function ViewTransactions() {
                         <tr>
                             <th>Date</th>
                             <th>UTR Number</th>
-                            <th>Qty</th>
+                            <th>Amount</th>
                             <th>Status</th>
+                            <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,13 +95,15 @@ export default function ViewTransactions() {
                             };
                             return (
                                 <tr key={item.id}>
-                                    <td>{item.buyDate}</td>
+                                    <td>{formatDate(item.buyDate)}</td>
                                     <td>{item.utrNumber}</td>
-                                    <td>{item.btcQty}</td>
+                                    <td>{item.buyAmount !== 0 ? item.buyAmount : item.withdrawAmount}</td>
                                     <td style={textStyle}>
                                         {message}
                                     </td>
+                                    <td>{item.type}</td>
                                 </tr>
+
                             );
                         })}
                     </tbody>

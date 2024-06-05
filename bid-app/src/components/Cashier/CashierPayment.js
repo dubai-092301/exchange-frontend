@@ -7,6 +7,7 @@ export default function CashierPayment() {
   const [isValid, setIsValid] = useState(false);
   const [bankDetails, setBankDetails] = useState(null);
   const [btcQty, setBtcQty] = useState(null);
+  const [utrNumber, setUtrNumber] = useState('');
 
   useEffect(() => {
     validateForm();
@@ -65,7 +66,8 @@ export default function CashierPayment() {
         },
         body: new URLSearchParams({
           amount: amount,
-          phoneNumber: phoneNumber
+          phoneNumber: phoneNumber,
+          utrNumber: utrNumber
         })
       }).then(response => {
         if (response.ok) {
@@ -81,6 +83,10 @@ export default function CashierPayment() {
         alert('An error occurred while making the payment.');
       });
     }
+  };
+
+  const handleUtrNumberChange = (event) => {
+    setUtrNumber(event.target.value);
   };
 
   useEffect(() => {
@@ -142,6 +148,16 @@ export default function CashierPayment() {
             value={amount}
             onChange={handleAmountChange}
           />
+        </div>
+        <div className="d-flex flex-row pb-3">
+          <div className="col-md-4 p-2">UTR Number <span style={{ color: "red" }}>*</span> :</div>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="UTR Number"
+            value={utrNumber}
+            onChange={handleUtrNumberChange}
+          ></input>
         </div>
         <div className="d-flex flex-row pb-3">
           <input

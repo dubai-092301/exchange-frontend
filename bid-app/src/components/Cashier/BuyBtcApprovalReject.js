@@ -31,11 +31,14 @@ export default function BuyBtcApprovalReject() {
   }
 
   const handleSearch = (e) => {
-    const query = e.target.value;
+    const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered = data.filter(item =>
-      item.columnToSearch.toLowerCase().includes(query.toLowerCase())
-    );
+    const filtered = data.filter(item => {
+      const phoneNumber = item.phoneNumber ? String(item.phoneNumber).toLowerCase() : '';
+      const utrNumber = item.utrNumber ? String(item.utrNumber).toLowerCase() : '';
+      return phoneNumber.includes(query) || utrNumber.includes(query);
+    });
+    console.log('Filtered data:', filtered); // Debug log
     setFilteredData(filtered);
   };
 
@@ -86,7 +89,7 @@ export default function BuyBtcApprovalReject() {
             <tr>
               <th>Phone No</th>
               <th>UTR Number</th>
-              <th>Qty</th>
+              <th>Amount</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -95,7 +98,7 @@ export default function BuyBtcApprovalReject() {
               <tr key={item.id}>
                 <td>{item.phoneNumber}</td>
                 <td>{item.utrNumber}</td>
-                <td>{item.btcQty}</td>
+                <td>{item.buyAmount}</td>
                 <td>
                   <button type="button" className="btn btn-success" onClick={() => handleAction(item.id, true, false)}>Approve</button>
                   <button type="button" className="btn btn-danger" onClick={() => handleAction(item.id, false, true)}>Reject</button>
