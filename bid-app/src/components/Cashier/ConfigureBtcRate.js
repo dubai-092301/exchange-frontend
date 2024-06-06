@@ -76,15 +76,15 @@ export default function ConfigureBtcRate() {
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh', backgroundColor: '#ffffcc' }}>
         <div className="card" style={{ width: '400px', padding: '20px', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
           <div className="card-body">
-            <h5 className="card-title text-center">Configure BTC Rate</h5>
+            <h5 className="card-title text-center">Configure USDT Rate</h5>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="btcRate" className="col-form-label">BTC Rate</label>
+                <label htmlFor="btcRate" className="col-form-label">USDT Rate</label>
                 <input
                   type="text"
                   className="form-control"
                   id="btcRate"
-                  placeholder="Enter BTC rate"
+                  placeholder="Enter USDT rate"
                   value={btcRate}
                   onChange={handleInputChange}
                 />
@@ -98,7 +98,7 @@ export default function ConfigureBtcRate() {
             </form>
             {latestBtcRate !== null && (
               <div className="mt-4 text-center">
-                <h2>Latest BTC Rate: {latestBtcRate}</h2>
+                <h2>Latest USDT Rate: {latestBtcRate}</h2>
               </div>
             )}
           </div>

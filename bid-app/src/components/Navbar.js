@@ -63,7 +63,7 @@ export default function Navbar() {
               </>
             )}
           </ul>
-          {isAuthenticated && (
+          {isCashierOrAdmin && (
             <ul className="navbar-nav d-flex justify-content-end">
               <li className="nav-item me-2 dropdown">
                 <Link className="nav-link me-2 dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,7 +73,7 @@ export default function Navbar() {
                   {isCashierOrAdmin && (
                     <>
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/buy-btc-approval-reject">Approve</Link></li>
-                      <li><Link className="dropdown-item" style={{ color: 'black' }} to="/configure-btc-rate">Configure BTC</Link></li>
+                      <li><Link className="dropdown-item" style={{ color: 'black' }} to="/configure-btc-rate">Configure USDT</Link></li>
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/cashier-payment">Cashier Payment</Link></li>
                     </>
                   )}

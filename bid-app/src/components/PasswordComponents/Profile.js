@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import Navbar from '../Navbar';
 
 export default function Profile() {
+  const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [reEnteredPassword, setReEnteredPassword] = useState('');
   const [mobileNo, setMobileNo] = useState(null);
 
   const validatePasswords = () => {
-    // Check if the password is at least 6 characters long
     if (newPassword.length < 6) {
       alert('Password must be at least 6 characters long.');
       return false;
     }
 
-    // Check if the password is not only numeric or alphabets
     const isAlphaNumeric = /^[a-zA-Z0-9]*$/.test(newPassword);
     const isNumeric = /^[0-9]*$/.test(newPassword);
     const isAlpha = /^[a-zA-Z]*$/.test(newPassword);
@@ -22,18 +21,15 @@ export default function Profile() {
       return false;
     }
 
-    // Check if new password and re-entered password are the same
     if (newPassword !== reEnteredPassword) {
       alert('New Password and Re-entered Password must be the same.');
       return false;
     }
 
-    // Here you can submit the form or perform further actions
     return true;
   };
 
   useEffect(() => {
-    // Get phone number
     fetch('http://exchange-btc.in:8080/getPhoneNumber', {
       method: 'GET',
       headers: {
@@ -43,19 +39,60 @@ export default function Profile() {
       .then(response => response.json())
       .then(data => {
         setMobileNo(data);
-        console.log('We are checking the phone number in log'+data);
+        console.log('We are checking the phone number in log' + data);
       })
       .catch(error => {
-        console.error('Error fetching BTC quantity:', error);
+        console.error('Error fetching phone number:', error);
       });
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validatePasswords()) {
-      // Submit the form or perform the desired action
-      console.log('Form submitted');
-    }
+
+    // Check old password
+    fetch('http://exchange-btc.in:8080/checkOldPassword', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+      },
+      body: JSON.stringify({
+        phoneNumber: mobileNo,
+        password: oldPassword
+      })
+    })
+      .then(response => response.json())
+      .then(isValidOldPassword => {
+        if (!isValidOldPassword) {
+          alert('Invalid old password. Please re-enter.');
+        } else if (validatePasswords()) {
+          // Update password
+          fetch('http://exchange-btc.in:8080/updatePassword', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            },
+            body: JSON.stringify({
+              phoneNumber: mobileNo,
+              password: newPassword
+            })
+          })
+            .then(response => {
+              if (response.ok) {
+                alert('Password updated successfully.');
+              } else {
+                alert('Error updating password.');
+              }
+            })
+            .catch(error => {
+              console.error('Error updating password:', error);
+            });
+        }
+      })
+      .catch(error => {
+        console.error('Error checking old password:', error);
+      });
   };
 
   return (
@@ -66,13 +103,20 @@ export default function Profile() {
           <div className="form-group row user-select-none">
             <label htmlFor="staticPhoneNumber" className="col-sm-2 col-form-label">Phone Number</label>
             <div className="col-sm-10">
-              <span my-2>{mobileNo}</span>
+              <span>{mobileNo}</span>
             </div>
           </div>
           <div className="form-group row">
             <label htmlFor="newOldPswd" className="col-sm-2 col-form-label">Old Password</label>
             <div className="col-sm-10">
-              <input type="password" className="form-control" id="newOldPswd" placeholder="Old Password" />
+              <input
+                type="password"
+                className="form-control"
+                id="newOldPswd"
+                placeholder="Old Password"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
             </div>
           </div>
           <div className="form-group row">
