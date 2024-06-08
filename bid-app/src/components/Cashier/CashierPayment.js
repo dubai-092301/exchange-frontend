@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../Navbar';
 
 export default function CashierPayment() {
@@ -8,27 +9,25 @@ export default function CashierPayment() {
   const [bankDetails, setBankDetails] = useState(null);
   const [btcQty, setBtcQty] = useState(null);
   const [utrNumber, setUtrNumber] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const phoneNumberParam = params.get('phoneNumber');
+    if (phoneNumberParam) {
+      setPhoneNumber(phoneNumberParam);
+      fetchBankDetails(phoneNumberParam);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     validateForm();
-    if (phoneNumber.length === 10) {
-      fetchBankDetails();
-    }
-  }, [phoneNumber, amount, btcQty]);
+  }, [phoneNumber, amount, utrNumber, bankDetails]);
 
   const validateForm = () => {
-    const phoneNumberPattern = /^\d{10}$/;
-    const isPhoneNumberValid = phoneNumberPattern.test(phoneNumber);
-    const isAmountValid = amount > 100;
-    // Validate form only if BTC quantity is greater than 0
-    setIsValid(isPhoneNumberValid && isAmountValid && btcQty > 0);
-  };
-
-  const handlePhoneNumberChange = (event) => {
-    const value = event.target.value;
-    if (/^\d*$/.test(value)) { // Only allow digits
-      setPhoneNumber(value);
-    }
+    const isAmountValid = amount > 0;
+    const isUtrNumberValid = utrNumber.trim() !== '';
+    setIsValid(isAmountValid && isUtrNumberValid);
   };
 
   const handleAmountChange = (event) => {
@@ -36,7 +35,11 @@ export default function CashierPayment() {
     setAmount(value);
   };
 
-  const fetchBankDetails = () => {
+  const handleUtrNumberChange = (event) => {
+    setUtrNumber(event.target.value);
+  };
+
+  const fetchBankDetails = (phoneNumber) => {
     fetch(`http://exchange-btc.in:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
       method: 'GET',
       headers: {
@@ -45,7 +48,6 @@ export default function CashierPayment() {
     }).then(response => response.json())
       .then(data => {
         if (data) {
-          console.log(data);
           setBankDetails(data);
         } else {
           alert('Bank account details not available for this number');
@@ -85,12 +87,7 @@ export default function CashierPayment() {
     }
   };
 
-  const handleUtrNumberChange = (event) => {
-    setUtrNumber(event.target.value);
-  };
-
   useEffect(() => {
-    // Fetch available BTC quantity when the component mounts
     fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
@@ -117,15 +114,22 @@ export default function CashierPayment() {
             className="form-control my-2"
             placeholder="Phone Number"
             value={phoneNumber}
-            onChange={handlePhoneNumberChange}
+            disabled
           />
         </div>
-        {bankDetails && (
+        {bankDetails ? (
           <div className="d-flex flex-column pb-3">
-            <div className="col-md-4 p-2">Bank Account Number: {bankDetails.bankAccountId}</div>
-            <div className="col-md-4 p-2">Bank Account Name: {bankDetails.accountHolderName}</div>
-            <div className="col-md-4 p-2">IFSC Code: {bankDetails.ifsc}</div>
-            <div className="col-md-4 p-2">UPI ID: {bankDetails.upiId}</div>
+            {bankDetails.bankAccountId && bankDetails.accountHolderName && bankDetails.ifsc ? (
+              <>
+                <div className="col-md-4 p-2">Bank Account Number: {bankDetails.bankAccountId}</div>
+                <div className="col-md-4 p-2">Bank Account Name: {bankDetails.accountHolderName}</div>
+                <div className="col-md-4 p-2">IFSC Code: {bankDetails.ifsc}</div>
+              </>
+            ) : bankDetails.upiId ? (
+              <div className="col-md-4 p-2">UPI ID: {bankDetails.upiId}</div>
+            ) : (
+              <div className="col-md-4 p-2 text-danger">Bank or UPI details not available</div>
+            )}
             <div className="d-flex pb-2">
               <div>
                 <p>
@@ -137,6 +141,10 @@ export default function CashierPayment() {
               </div>
               <div className="ms-auto"></div>
             </div>
+          </div>
+        ) : (
+          <div className="d-flex flex-column pb-3">
+            <div className="col-md-4 p-2 text-danger">Bank or UPI details not available</div>
           </div>
         )}
         <div className="d-flex flex-row pb-3">

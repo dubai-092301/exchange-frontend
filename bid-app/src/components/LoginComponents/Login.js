@@ -79,7 +79,7 @@ const Login = () => {
             <div className="card mt-3">
                 <div className="card-body">
                     <p className="card-text">If you are not registered, please <a href="/register">sign up here</a>.</p>
-                    <p className="card-text">Forgot your password? <button onClick={redirectToChangePassword} className="btn btn-link">Reset Password</button></p>
+                    {/* <p className="card-text">Forgot your password? <button onClick={redirectToChangePassword} className="btn btn-link">Reset Password</button></p> */}
                 </div>
             </div>
         </div>

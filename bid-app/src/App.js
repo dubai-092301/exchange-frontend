@@ -16,6 +16,7 @@ import Home from './components/LoginComponents/Home';
 import ChangePassword from './components/PasswordComponents/ChangePassword';
 import Register from './components/Register';
 import CashierPayment from './components/Cashier/CashierPayment';
+import DisplayAllUsers from './components/Cashier/DisplayAllUsers';
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/changePassword" element={<ChangePassword />} />
+        <Route path="/display-all-users" element={<DisplayAllUsers />} />
       </Routes> 
     </BrowserRouter>
     </>

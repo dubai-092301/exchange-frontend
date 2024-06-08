@@ -6,8 +6,8 @@ const Register = () => {
         name: '',
         password: '',
         phoneNumber: '',
-        otp: '',
-        inputOtp: ''
+        // otp: '',
+        // inputOtp: ''
     });
 
     useEffect(() => {
@@ -27,31 +27,31 @@ const Register = () => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
-    const requestOTP = () => {
-        axios.get(`http://exchange-btc.in:8080/api/client/auth/requestOtp/${user.phoneNumber}`)
-            .then(response => {
-                alert('OTP sent to your phone.');
-            })
-            .catch(error => alert('Error sending OTP.'));
-    };
+    // const requestOTP = () => {
+    //     axios.get(`http://exchange-btc.in:8080/api/client/auth/requestOtp/${user.phoneNumber}`)
+    //         .then(response => {
+    //             alert('OTP sent to your phone.');
+    //         })
+    //         .catch(error => alert('Error sending OTP.'));
+    // };
 
     const registerUser = (e) => {
         e.preventDefault(); // Prevent form from reloading the page
-
+        console.log("Sunil we ae register user ");
         axios.post('http://exchange-btc.in:8080/api/client/auth/register/', {
             name: user.name,
             password: user.password,
             phoneNumber: user.phoneNumber,
-            otp: user.inputOtp
+            // otp: user.inputOtp
         })
             .then(response => {
+                console.log("We got the response ");
                 if(response.data.status === 'failed') {
                     alert(response.data.message);
                 }else{
                     alert('Registration Successful');
                     window.location = "/"; // Redirect to the login page after successful registration
                 }
-
             })
             .catch(error => alert('Registration Failed'));
     };
@@ -71,12 +71,12 @@ const Register = () => {
                 <div className="mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
                     <input type="number" className="form-control" id="phoneNumber" name="phoneNumber" value={user.phoneNumber} onChange={handleChange} />
-                    <button type="button" className="btn btn-secondary" onClick={requestOTP}>Request OTP</button>
+                    {/* <button type="button" className="btn btn-secondary" onClick={requestOTP}>Request OTP</button> */}
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label htmlFor="inputOtp" className="form-label">Enter OTP</label>
                     <input type="text" className="form-control" id="inputOtp" name="inputOtp" value={user.inputOtp} onChange={handleChange} />
-                </div>
+                </div> */}
                 <button type="submit" className="btn btn-primary">Register</button>
             </form>
         </div>
