@@ -28,7 +28,7 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-warning text-dark">
         <div className="container-fluid" style={{ minHeight: '80px' }}>
-          <Link className="navbar-brand" to="/">MyApp</Link>
+          {/* <Link className="navbar-brand" to="/">MyApp</Link> */}
           <button className="navbar-toggler" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -143,3 +143,4 @@ export default function Navbar() {
     </>
   );
 }
+
