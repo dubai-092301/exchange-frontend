@@ -107,7 +107,7 @@ export default function CashierPayment() {
     <>
       <Navbar />
       <div className='container' style={{ backgroundColor: "#ffffcc" }}>
-        <div className="d-flex flex-row pb-3">
+        <div className="d-flex flex-wrap pb-3">
           <div className="col-md-4 p-2">Phone Number <span style={{ color: "red" }}>*</span> :</div>
           <input
             type="text"
@@ -147,7 +147,7 @@ export default function CashierPayment() {
             <div className="col-md-4 p-2 text-danger">Bank or UPI details not available</div>
           </div>
         )}
-        <div className="d-flex flex-row pb-3">
+        <div className="d-flex flex-wrap pb-3">
           <div className="col-md-4 p-2">Payment Amount <span style={{ color: "red" }}>*</span> :</div>
           <input
             type="number"
@@ -157,7 +157,7 @@ export default function CashierPayment() {
             onChange={handleAmountChange}
           />
         </div>
-        <div className="d-flex flex-row pb-3">
+        <div className="d-flex flex-wrap pb-3">
           <div className="col-md-4 p-2">UTR Number <span style={{ color: "red" }}>*</span> :</div>
           <input
             type="text"
@@ -167,7 +167,7 @@ export default function CashierPayment() {
             onChange={handleUtrNumberChange}
           ></input>
         </div>
-        <div className="d-flex flex-row pb-3">
+        <div className="d-flex flex-wrap pb-3">
           <input
             type="button"
             value="Make Payment"

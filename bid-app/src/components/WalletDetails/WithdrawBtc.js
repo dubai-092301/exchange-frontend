@@ -123,7 +123,7 @@ export default function WithdrawBtc() {
                               <div className="ms-auto"></div>
                             </div>
                             <hr/>
-                            <div className="d-flex flex-row pb-3">
+                            <div className="d-flex flex-wrap pb-3">
                               <div className="col-md-4 p-2">Bank Account Number :</div>
                               <input
                                 type="number"
@@ -134,7 +134,7 @@ export default function WithdrawBtc() {
                                 onChange={handleInputChange}
                               />
                             </div>
-                            <div className="d-flex flex-row pb-3">
+                            <div className="d-flex flex-wrap pb-3">
                               <div className="col-md-4 p-2">Bank Account Name :</div>
                               <input
                                 type="text"
@@ -145,7 +145,7 @@ export default function WithdrawBtc() {
                                 onChange={handleInputChange}
                               />
                             </div>
-                            <div className="d-flex flex-row pb-3">
+                            <div className="d-flex flex-wrap pb-3">
                               <div className="col-md-4 p-2">IFSC Code :</div>
                               <input
                                 type="text"
@@ -157,7 +157,7 @@ export default function WithdrawBtc() {
                               />
                             </div>
                             <hr />
-                            <div className="d-flex flex-row pb-3">
+                            <div className="d-flex flex-wrap pb-3">
                               <div className="col-md-4 p-2">UPI Details: </div>
                               <input
                                 type="text"
@@ -169,7 +169,7 @@ export default function WithdrawBtc() {
                               />
                             </div>
                             <hr />
-                            <div className="d-flex flex-row pb-3">
+                            <div className="d-flex flex-wrap pb-3">
                               <input
                                 type="button"
                                 value="Withdraw"
