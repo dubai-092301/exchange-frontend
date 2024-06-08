@@ -75,7 +75,7 @@ export default function Navbar() {
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/buy-btc-approval-reject">Approve</Link></li>
                       <li><Link className="dropdown-item" style={{ color: 'black' }} to="/configure-btc-rate">Configure USDT</Link></li>
                       {/* <li><Link className="dropdown-item" style={{ color: 'black' }} to="/cashier-payment">Cashier Payment</Link></li> */}
-                      <li><Link className="dropdown-item" style={{ color: 'black' }} to="/display-all-users">Make Payment to Pending</Link></li>
+                      <li><Link className="dropdown-item" style={{ color: 'black' }} to="/display-all-users">Payment</Link></li>
                     </>
                   )}
                 </ul>
