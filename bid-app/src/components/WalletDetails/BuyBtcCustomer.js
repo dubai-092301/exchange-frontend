@@ -132,16 +132,6 @@ export default function BuyBtcCustomer() {
                               <div className="ms-auto"></div>
                             </div>
                             <div className="d-flex flex-wrap pb-3">
-                              <div className="col-md-4 p-2">UTR Number <span style={{ color: "red" }}>*</span> :</div>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="UTR Number"
-                                value={utrNumber}
-                                onChange={handleUtrNumberChange}
-                              ></input>
-                            </div>
-                            <div className="d-flex flex-wrap pb-3">
                               <div className="col-md-4 p-2">Quantity <span style={{ color: "red" }}>*</span> :</div>
                               <input
                                 type="number"
@@ -149,6 +139,16 @@ export default function BuyBtcCustomer() {
                                 placeholder="Quantity"
                                 value={quantity}
                                 onChange={handleQuantityChange}
+                              ></input>
+                            </div>
+                            <div className="d-flex flex-wrap pb-3">
+                              <div className="col-md-4 p-2">UTR Number <span style={{ color: "red" }}>*</span> :</div>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="UTR Number"
+                                value={utrNumber}
+                                onChange={handleUtrNumberChange}
                               ></input>
                             </div>
                             {quantity < 100 && (
