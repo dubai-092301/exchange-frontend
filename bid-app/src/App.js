@@ -36,8 +36,8 @@ function App() {
         <Route exact path = '/profile' element = {<Profile/>}></Route>
         <Route exact path = '/configure-btc-rate' element = {<ConfigureBtcRate/>}></Route>
         <Route exact path = '/cashier-payment' element = {<CashierPayment/>}></Route>
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/display-all-users" element={<DisplayAllUsers />} />
