@@ -88,20 +88,22 @@ export default function CashierPayment() {
   };
 
   useEffect(() => {
-    fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        setBtcQty(data);
+    if (phoneNumber) {
+      fetch(`http://exchange-btc.in:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
       })
-      .catch(error => {
-        console.error('Error fetching BTC quantity:', error);
-      });
-  }, []);
+        .then(response => response.json())
+        .then(data => {
+          setBtcQty(data);
+        })
+        .catch(error => {
+          console.error('Error fetching BTC quantity:', error);
+        });
+    }
+  }, [phoneNumber]);
 
   return (
     <>
