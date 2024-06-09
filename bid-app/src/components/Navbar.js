@@ -28,7 +28,7 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-warning text-dark">
         <div className="container-fluid" style={{ minHeight: '80px' }}>
-          {/* <Link className="navbar-brand" to="/">MyApp</Link> */}
+          <Link className="navbar-brand" to="/rules">Home</Link>
           <button className="navbar-toggler" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -88,7 +88,7 @@ export default function Navbar() {
       </nav>
 
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <button className="close-btn" onClick={toggleSidebar}>×</button>
+        <button className="close-btn" onClick={toggleSidebar}>&times;</button>
         <ul className="navbar-nav">
           {isAuthenticated ? (
             <>
@@ -143,4 +143,3 @@ export default function Navbar() {
     </>
   );
 }
-

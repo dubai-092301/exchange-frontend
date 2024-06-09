@@ -1,42 +1,104 @@
 /* Navbar.css */
+
+/* General styles for the navbar */
+.navbar {
+  padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.nav-link {
+  color: #000;
+  font-weight: bold;
+}
+
+.nav-link.active {
+  color: #fff;
+}
+
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/* Ensuring the toggle icon is centered and has enough padding */
+.navbar-toggler-icon {
+  width: 1.5em;
+  height: 1.5em;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5em;
+  position: relative;
+}
+
+.navbar-toggler-icon:before {
+  content: '\2630';
+  font-size: 1.5em;
+  line-height: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+}
+
+/* Sidebar styles */
 .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #ffc107; /* Yellow background */
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  
-  .sidebar.open {
-    width: 250px;
-  }
-  
-  .sidebar .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 36px;
-  }
-  
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
-  
-  .sidebar .nav-link {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #000; /* Black text color */
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidebar .nav-link:hover {
-    color: #333;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #ffc107; /* Matching yellow color */
+  padding-top: 60px;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  color: #000;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.sidebar .nav-link {
+  color: #000;
+  padding: 10px 15px;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #e0a800; /* Slightly darker yellow for hover */
+  color: #fff;
+}
+
+.sidebar .btn {
+  color: #000;
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.sidebar .btn:hover {
+  background-color: #e0a800; /* Slightly darker yellow for hover */
+  color: #fff;
+}
