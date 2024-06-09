@@ -14,7 +14,7 @@ import ConfigureBtcRate from './components/Cashier/ConfigureBtcRate';
 import Login from './components/LoginComponents/Login';
 import Home from './components/LoginComponents/Home';
 import ChangePassword from './components/PasswordComponents/ChangePassword';
-import Register from './components/Register';
+import Register from './components/RegisterComponent/Register';
 import CashierPayment from './components/Cashier/CashierPayment';
 import DisplayAllUsers from './components/Cashier/DisplayAllUsers';
 

@@ -50,7 +50,7 @@ export default function Scanner() {
                 </div>
                 <div className="p-2 d-flex text-center">
                     {imageSrc ? (
-                        <div style={{ width: '800px', height: '450px', overflow: 'hidden' }}>
+                        <div style={{ width: '800px', height: '300px', overflow: 'hidden' }}>
                             <img src={imageSrc} className="rounded mx-auto d-block" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                     ) : (

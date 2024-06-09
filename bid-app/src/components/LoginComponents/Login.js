@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Login.css'; // Import the CSS file
+import styles from './Login.module.css';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -9,15 +9,10 @@ const Login = () => {
     });
 
     useEffect(() => {
-        document.body.style.backgroundColor = '#ffffcc'; // Yellow background
-        document.body.style.color = 'black';
-        document.body.style.margin = '0';
-        document.body.style.padding = '0';
-        document.body.style.height = '100vh';
-        
+        document.body.classList.add(styles.bodyBackground);
+
         return () => {
-            document.body.style.backgroundColor = null;
-            document.body.style.color = null;
+            document.body.classList.remove(styles.bodyBackground);
         };
     }, []);
 
@@ -44,11 +39,11 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-box">
+        <div className={styles.container}>
+            <div className={styles.box}>
                 <h2>Login</h2>
                 <form onSubmit={loginUser}>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="phoneNumber">Phone Number</label>
                         <input 
                             type="text" 
@@ -59,7 +54,7 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="password">Password</label>
                         <input 
                             type="password" 
@@ -70,13 +65,12 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="confirm-btn">Login</button>
+                    <button type="submit" className={styles.confirmBtn}>Login</button>
                 </form>
-                <p className="register-link">If you are not registered, please <a href="/register">sign up here</a>.</p>
+                <p className={styles.registerLink}>If you are not registered, please <a href="/">sign up here</a>.</p>
             </div>
         </div>
     );
 };
 
 export default Login;
-    

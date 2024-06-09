@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Register.css'; // Import the CSS file
+import styles from './Register.module.css';
 
 const Register = () => {
     const [user, setUser] = useState({
@@ -10,15 +10,10 @@ const Register = () => {
     });
 
     useEffect(() => {
-        document.body.style.backgroundColor = '#ffffcc';
-        document.body.style.color = 'black';
-        document.body.style.margin = '0';
-        document.body.style.padding = '0';
-        document.body.style.height = '100vh';
-        
+        document.body.classList.add(styles.bodyBackground);
+
         return () => {
-            document.body.style.backgroundColor = null;
-            document.body.style.color = null;
+            document.body.classList.remove(styles.bodyBackground);
         };
     }, []);
 
@@ -38,32 +33,32 @@ const Register = () => {
                     alert(response.data.message);
                 } else {
                     alert('Registration Successful');
-                    window.location = "/"; 
+                    window.location = "/";
                 }
             })
             .catch(error => alert('Registration Failed'));
     };
 
     return (
-        <div className="register-container">
-            <div className="register-box">
+        <div className={styles.container}>
+            <div className={styles.box}>
                 <h2>Create account</h2>
                 <p>Welcome to join us</p>
                 <form onSubmit={registerUser}>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="name">Name</label>
                         <input type="text" id="name" name="name" value={user.name} onChange={handleChange} required />
                     </div>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="phoneNumber">Phone</label>
                         <input type="number" id="phoneNumber" name="phoneNumber" value={user.phoneNumber} onChange={handleChange} required />
                     </div>
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" name="password" value={user.password} onChange={handleChange} required />
                     </div>
-                    <button type="submit" className="confirm-btn">Confirm</button>
-                    <p className="login-link">Already have an account? <a href="/login">Log in</a></p>
+                    <button type="submit" className={styles.confirmBtn}>Confirm</button>
+                    <p className={styles.loginLink}>Already have an account? <a href="/login">Log in</a></p>
                 </form>
             </div>
         </div>
