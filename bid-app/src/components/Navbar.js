@@ -6,6 +6,7 @@ export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   const [btcRate, setBtcRate] = useState(null);
+  const [btcQty, setBtcQty] = useState(null);
   let isUserOrAdmin = false;
   let isCashierOrAdmin = false;
 
@@ -43,6 +44,24 @@ export default function Navbar() {
       });
   };
 
+  useEffect(() => {
+    fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        setBtcQty(data);
+      })
+      .catch(error => {
+        console.error('Error fetching BTC quantity:', error);
+      });
+
+    fetchLatestBtcRate();
+  }, []);
+
   // Fetch BTC rate when the component mounts
   useEffect(() => {
     fetchLatestBtcRate();
@@ -52,9 +71,9 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-warning text-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="#">Home</Link>
+          <Link className="navbar-brand" to="/rules">Home</Link>
           <div className="btc-rate-container">
-            {isAuthenticated && <span className="btc-rate">{btcRate}</span>}
+            {isAuthenticated && <span className="btc-rate">$ {btcQty}</span>}
           </div>
           <button className="navbar-toggler ms-auto" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>

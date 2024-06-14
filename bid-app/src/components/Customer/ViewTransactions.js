@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
+import './ViewTransactions.css'; // Import the CSS file
 
 export default function ViewTransactions() {
     const [data, setData] = useState([]);
@@ -70,14 +71,14 @@ export default function ViewTransactions() {
     return (
         <>
             <Navbar />
-            <div className='container' style={{ backgroundColor: '#ffffcc', color: 'black', maxWidth: '1900px' }}>
+            <div className='container rules-container'>
                 <input
                     type="text"
                     value={searchQuery}
                     onChange={handleSearch}
                     placeholder="Search"
                 />
-                <table className='table table-bordered table-hover' style={{ backgroundColor: '#ffffcc', color: 'black', maxWidth: '1900px' }}>
+                <table className='table table-bordered table-hover'>
                     <thead>
                         <tr>
                             <th>Date</th>

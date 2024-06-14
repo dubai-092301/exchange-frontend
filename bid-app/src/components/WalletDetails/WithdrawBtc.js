@@ -103,11 +103,11 @@ export default function WithdrawBtc() {
                   <div className="col-md-7 col-xl-7 mb-4 mb-md-0">
                     <div className="accordion" id="accordionExample">
                       <div className="accordion-item" >
-                        <h3 className="accordion-header mx-3 my-3">
+                        <h4 className="accordion-header mx-3 my-3">
                           <strong>Withdraw Account Details</strong>
-                        </h3>
+                        </h4>
                         <p></p>
-                        <p className="mx-3">* Please enter either bank account details or UPI id</p>
+                        <p className="mx-3">* कृपया या तो बैंक खाता विवरण या UPI आईडी दर्ज करें ।</p>
                         <hr />
                         <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                           <div className="accordion-body">
