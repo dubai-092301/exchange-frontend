@@ -7,14 +7,18 @@ export default function Rules() {
         <>
             <Navbar/>
             <div className='container' style= {{backgroundColor: '#ffffcc', color : 'black'}}>
-                <h1 className='my-2'>BTC Rules</h1>
+                <h1 className='my-2'>USDT Rules</h1>
                 <div className="accordion" id="accordionExample">
                     <div className="accordion-item" style= {{backgroundColor: '#ffffcc', color : 'black'}}>
                         <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                            <strong> * Minimum of 100 BTC has to be purchased.</strong><br />
-                            <strong> * Minimum of 100 BTC can be withdrawn.</strong><br />
-                            <strong> * User can upload images less than 5 MB</strong><br />
+                            <strong> 1. न्यूनतम 100 USDT खरीदना होगा।</strong><br /><br />
+                            <strong> 2. कोई भी अकाउंट में साइबर कंप्लेंट लगती है वह कंपनी की जिम्मेदारी लेता है।</strong><br /><br />
+                            <strong> 3. हमारी कंपनी से कोई भी लेनदेन भारत के बाहर से या धोखाधड़ी का नहीं होगा।</strong><br /><br />
+                            <strong> 4. कोई भी अकाउंट में डेबिट फ्रीज लगता है तो उसकी जिम्मेदारी कंपनी की नहीं होगी।</strong><br /><br />
+                            <strong> 5. हमारे यहां USDT का रेट हमेशा चेंज होता है। इसिलिये USDT जमा करने से पहले वर्तमान दर की जांच करें।</strong><br /><br />
+                            <strong> 6. जब आप अपने खाते में राशि जमा न करें, तब आप बैंक विवरण की स्क्रीन से बटन बंद कर दें।</strong><br /><br />
+                            <strong> धन्यवाद</strong><br /><br />
                         </div>
                         </div>
                     </div>

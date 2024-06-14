@@ -116,9 +116,11 @@ export default function WithdrawBtc() {
                                 <p>
                                   <b>
                                     Current Wallet Balance{" "}
-                                    <span className="text-success">{btcQty !== null ? btcQty : "0"}</span>
+                                    
+                                    <span className="text-success"><i class="bi bi-currency-rupee"></i>{btcQty !== null ? btcQty : "0"}</span>
                                   </b>
                                 </p>
+                                <span><input type="checkbox" checked data-toggle="toggle" data-size="mini" /></span>
                               </div>
                               <div className="ms-auto"></div>
                             </div>
