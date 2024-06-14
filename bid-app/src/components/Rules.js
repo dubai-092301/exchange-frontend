@@ -13,7 +13,7 @@ export default function Rules() {
     <>
       <Navbar />
       <div className="container" style={{ backgroundColor: '#ffffcc', color: 'black' }}>
-        <h3 className="my-2">नियम और शर्ते</h3>
+        <h4 className="my-2">नियम और शर्ते</h4>
         <div className="accordion" id="accordionExample">
           <div className="accordion-item" style={{ backgroundColor: '#ffffcc', color: 'black' }}>
             <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
