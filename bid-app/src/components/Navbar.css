@@ -26,6 +26,7 @@
   padding: 0.25rem 0.75rem;
   font-size: 1.5rem;
   color: #000;
+  margin-left: auto; /* Ensure the toggler is on the right */
 }
 
 /* Ensuring the toggle icon is centered and has enough padding */
@@ -103,7 +104,6 @@
   color: #fff;
 }
 
-
 @keyframes marquee {
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
@@ -137,7 +137,7 @@
   align-items: center;
   font-size: 20px;
   font-weight: bold;
-  margin-left: auto;
+  margin-left: auto; /* Ensure the BTC rate is on the right */
   white-space: nowrap; /* Ensure the text does not wrap */
 }
 
@@ -169,6 +169,6 @@
 
 @media (max-width: 768px) {
   .btc-rate-container {
-    margin-left: 10px; /* Adjust margin for mobile view */
+    margin-left: auto; /* Ensure the BTC rate is on the right in mobile view */
   }
 }
