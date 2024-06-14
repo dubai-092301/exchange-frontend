@@ -13,11 +13,11 @@ export default function Rules() {
                         <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                             <strong> 1. न्यूनतम 100 USDT खरीदना होगा।</strong><br /><br />
-                            <strong> 2. कोई भी अकाउंट में साइबर कंप्लेंट लगती है वह कंपनी की जिम्मेदारी लेता है।</strong><br /><br />
-                            <strong> 3. हमारी कंपनी से कोई भी लेनदेन भारत के बाहर से या धोखाधड़ी का नहीं होगा।</strong><br /><br />
+                            <strong> 2. कोई भी एकाउंट में साइबर कंप्लेंट लगती हे उसकी जिम्मेदारी कम्पनी की होगी ।</strong><br /><br />
+                            <strong> 3. हमारी कंपनी से कोई भी लेनदेन भारत के बाहर से या धोखाधड़ी का नहीं होगा ।</strong><br /><br />
                             <strong> 4. कोई भी अकाउंट में डेबिट फ्रीज लगता है तो उसकी जिम्मेदारी कंपनी की नहीं होगी।</strong><br /><br />
                             <strong> 5. हमारे यहां USDT का रेट हमेशा चेंज होता है। इसिलिये USDT जमा करने से पहले वर्तमान दर की जांच करें।</strong><br /><br />
-                            <strong> 6. जब आप अपने खाते में राशि जमा न करें, तब आप बैंक विवरण की स्क्रीन से बटन बंद कर दें।</strong><br /><br />
+                            <strong> 6. जब आप अपने खाते में लेन देन नही चाहते हे, तब आप बैंक विवरण की स्क्रीन से बटन बंद कर दें।</strong><br /><br />
                             <strong> धन्यवाद</strong><br /><br />
                         </div>
                         </div>
