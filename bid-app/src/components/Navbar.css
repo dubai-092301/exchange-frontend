@@ -2,7 +2,9 @@
 
 /* General styles for the navbar */
 .navbar {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem; /* Decreased padding to reduce height */
+  background-color: #ffc107; /* Yellow color */
+  color: #000; /* Text color */
 }
 
 .navbar-brand {
@@ -14,6 +16,7 @@
 .nav-link {
   color: #000;
   font-weight: bold;
+  padding: 0.5rem 1rem; /* Adjust padding for menu items */
 }
 
 .nav-link.active {
@@ -26,10 +29,8 @@
   padding: 0.25rem 0.75rem;
   font-size: 1.5rem;
   color: #000;
-  margin-left: auto; /* Ensure the toggler is on the right */
 }
 
-/* Ensuring the toggle icon is centered and has enough padding */
 .navbar-toggler-icon {
   width: 1.5em;
   height: 1.5em;
@@ -52,7 +53,26 @@
   color: #000;
 }
 
-/* Sidebar styles */
+.btc-rate-container {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.btc-rate {
+  margin-right: 5px;
+  color: #065004;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -63,10 +83,12 @@
   padding-top: 60px;
   transition: 0.3s;
   z-index: 9999;
+  display: none;
 }
 
 .sidebar.open {
   left: 0;
+  display: block;
 }
 
 .sidebar .close-btn {
@@ -104,15 +126,6 @@
   color: #fff;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-@keyframes shining {
-  100% { color: rgb(0, 0, 0); }
-}
-
 .marquee-container {
   overflow: hidden;
   white-space: nowrap;
@@ -132,43 +145,11 @@
   white-space: nowrap; /* Ensure the text does not wrap */
 }
 
-.btc-rate-container {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: auto; /* Ensure the BTC rate is on the right */
-  white-space: nowrap; /* Ensure the text does not wrap */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
-.btc-rate {
-  margin-right: 5px;
-  color: #065004;
-}
-
-.navbar-collapse {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sidebar {
-  display: none; /* Hide sidebar by default */
-}
-
-.sidebar.open {
-  display: block; /* Show sidebar when open */
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .btc-rate-container {
-    margin-left: auto; /* Ensure the BTC rate is on the right in mobile view */
-  }
+@keyframes shining {
+  100% { color: rgb(0, 0, 0); }
 }

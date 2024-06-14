@@ -51,7 +51,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-warning text-dark">
-        <div className="container-fluid" style={{ minHeight: '80px' }}>
+        <div className="container-fluid">
           <Link className="navbar-brand" to="#">Home</Link>
           <div className="btc-rate-container">
             {isAuthenticated && <span className="btc-rate">{btcRate}</span>}
