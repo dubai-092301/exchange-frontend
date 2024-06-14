@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'; // Import the CSS file
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const [btcRate, setBtcRate] = useState(null);
   let isUserOrAdmin = false;
   let isCashierOrAdmin = false;
 
@@ -17,22 +18,48 @@ export default function Navbar() {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('authToken');
     localStorage.removeItem('roles');
-    window.location = '/';
+    window.location = '/login';
   };
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const fetchLatestBtcRate = () => {
+    fetch('http://exchange-btc.in:8080/getCurrentBtcRate', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setBtcRate(data.btcRate);
+        console.log("BTC rate fetched: " + data.btcRate);
+      })
+      .catch((error) => {
+        console.error('Error fetching BTC rate:', error);
+      });
+  };
+
+  // Fetch BTC rate when the component mounts
+  useEffect(() => {
+    fetchLatestBtcRate();
+  }, []);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-warning text-dark">
         <div className="container-fluid" style={{ minHeight: '80px' }}>
-          <Link className="navbar-brand" to="/rules">Home</Link>
+          <Link className="navbar-brand" to="#">Home</Link>
           <button className="navbar-toggler" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className={`collapse navbar-collapse`} id="navbarScroll">
+          <div className="btc-rate-container">
+            {isAuthenticated && <span className="btc-rate">{btcRate}</span>}
+          </div>
+          <div className={`collapse navbar-collapse justify-content-between`} id="navbarScroll">
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ '--bs-scroll-height': '100px' }}>
               {isAuthenticated ? (
                 <>
@@ -84,9 +111,12 @@ export default function Navbar() {
               )}
             </ul>
           </div>
+          
         </div>
       </nav>
-
+      <div className="marquee-container">
+        <div className="marquee-text">🚀 Today's USDT Rate is {btcRate} 🚀</div>
+      </div>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={toggleSidebar}>&times;</button>
         <ul className="navbar-nav">
