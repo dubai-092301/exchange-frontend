@@ -5,7 +5,7 @@ export default function Rules() {
   return (
     <>
       <Navbar />
-      <div className='container' style={{ backgroundColor: '#ffffcc', color: 'black', marginTop: '20px', padding: '20px', borderRadius: '10px' }}>
+      <div className='container rules-container'>
         <h1 className='my-2'>नियम और शर्ते</h1>
         <div className="accordion" id="accordionExample">
           <div className="accordion-item" style={{ backgroundColor: '#ffffcc', color: 'black' }}>

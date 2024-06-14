@@ -134,6 +134,7 @@
   width: 100%;
   background: #f3ec86; /* Background color to highlight the text */
   padding: 10px 0;
+  margin-bottom: 10px; /* Decreased margin */
 }
 
 .marquee-text {
@@ -143,6 +144,15 @@
   font-size: 20px;
   font-weight: bold;
   white-space: nowrap; /* Ensure the text does not wrap */
+}
+
+.rules-container {
+  background-color: #ffffcc;
+  color: black;
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid white; /* Added white border */
 }
 
 @keyframes marquee {
