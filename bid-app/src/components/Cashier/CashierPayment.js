@@ -47,9 +47,11 @@ export default function CashierPayment() {
       }
     }).then(response => response.json())
       .then(data => {
-        if (data) {
+        if (data.isActive) {
           setBankDetails(data);
-        } else {
+        } else if(!data.isActive) {
+          alert("Bank details are disabled.");
+        }else {
           alert('Bank account details not available for this number');
         }
       }).catch(error => {
