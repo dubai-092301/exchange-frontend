@@ -167,3 +167,15 @@
 @keyframes shining {
   100% { color: rgb(0, 0, 0); }
 }
+
+.mobile-number {
+  font-weight: bold;
+  text-align: left;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 15px; /* Adjust padding to match other <li> elements */
+  list-style-type: none; /* Ensure it looks like other <li> elements */
+  border-bottom: 1px solid #000000; /* Optional: add a border for separation */
+}
+

@@ -47,11 +47,14 @@ export default function CashierPayment() {
       }
     }).then(response => response.json())
       .then(data => {
-        if (data.isActive) {
-          setBankDetails(data);
-        } else if(!data.isActive) {
-          alert("Bank details are disabled.");
-        }else {
+        console.log("Response Data:", data);
+        if (data.active !== undefined) {
+          if (data.active) {
+            setBankDetails(data);
+          } else {
+            alert("Bank details are disabled.");
+          }
+        } else {
           alert('Bank account details not available for this number');
         }
       }).catch(error => {
@@ -139,6 +142,7 @@ export default function CashierPayment() {
                 <p>
                   <b>
                     Total Available balance{" "}
+                    <i className="bi bi-currency-rupee"></i>
                     <span className="text-success">{btcQty !== null ? btcQty : "0"}</span>
                   </b>
                 </p>

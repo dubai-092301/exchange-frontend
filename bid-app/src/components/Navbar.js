@@ -7,7 +7,7 @@ export default function Navbar() {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   const [btcRate, setBtcRate] = useState(null);
   const [btcQty, setBtcQty] = useState(null);
-  const [mobile, setMobile] = useState(localStorage.getItem('mobileNo'));
+  const [mobile, setMobile] = useState(localStorage.getItem('mobile'));
   let isUserOrAdmin = false;
   let isCashierOrAdmin = false;
 
@@ -19,7 +19,7 @@ export default function Navbar() {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('authToken');
     localStorage.removeItem('roles');
-    localStorage.removeItem('mobileNo');
+    localStorage.removeItem('mobile');
     window.location = '/login';
   };
 
@@ -38,7 +38,6 @@ export default function Navbar() {
       .then((response) => response.json())
       .then((data) => {
         setBtcRate(data.btcRate);
-        console.log("BTC rate fetched: " + data.btcRate);
       })
       .catch((error) => {
         console.error('Error fetching BTC rate:', error);
@@ -64,13 +63,10 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    console.log("Current isAuthenticated value:", isAuthenticated);
-    console.log("Current mobile value:", mobile);
-    setMobile(localStorage.getItem('mobileNo'));
+    setMobile(localStorage.getItem('mobile'));
   }, [isAuthenticated]);
 
   useEffect(() => {
-    console.log("Mobile number updated to:", mobile);
   }, [mobile]);
 
   return (
@@ -82,7 +78,7 @@ export default function Navbar() {
           </button>
           <Link className="navbar-brand ms-2" to="/rules">Home</Link>
           <div className="btc-rate-container">
-            {isAuthenticated && <span className="btc-rate"><i className="bi bi-currency-rupee"></i> {btcQty}</span>}
+            {isAuthenticated && <span className="btc-rate"><i className="bi bi-currency-rupee"></i>{btcQty}</span>}
           </div>
           <div className={`collapse navbar-collapse justify-content-between`} id="navbarScroll">
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ '--bs-scroll-height': '100px' }}>
@@ -147,11 +143,16 @@ export default function Navbar() {
         </div>
       </nav>
       <div className="marquee-container">
-        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i> {btcRate} 🚀</div>
+        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀</div>
       </div>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={toggleSidebar}>&times;</button>
         <ul className="navbar-nav">
+          {mobile && (
+            <li className="nav-item mobile-number">
+              <span>{mobile.replace(/^"(.*)"$/, '$1')}</span>
+            </li>
+          )}
           {isAuthenticated ? (
             <>
               {isUserOrAdmin && (

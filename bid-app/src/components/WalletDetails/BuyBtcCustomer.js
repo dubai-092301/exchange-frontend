@@ -125,6 +125,7 @@ export default function BuyBtcCustomer() {
                                 <p>
                                   <b>
                                     Total Available balance{" "}
+                                    <i className="bi bi-currency-rupee"></i>
                                     <span className="text-success">{btcQty !== null ? btcQty : "0"}</span>
                                   </b>
                                 </p>
