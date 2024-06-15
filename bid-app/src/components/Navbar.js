@@ -73,7 +73,7 @@ export default function Navbar() {
         <div className="container-fluid">
           <Link className="navbar-brand" to="/rules">Home</Link>
           <div className="btc-rate-container">
-            {isAuthenticated && <span className="btc-rate">$ {btcQty}</span>}
+            {isAuthenticated && <span className="btc-rate"><i className="bi bi-currency-rupee"></i> {btcQty}</span>}
           </div>
           <button className="navbar-toggler ms-auto" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
