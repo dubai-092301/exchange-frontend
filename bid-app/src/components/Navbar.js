@@ -7,11 +7,11 @@ export default function Navbar() {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   const [btcRate, setBtcRate] = useState(null);
   const [btcQty, setBtcQty] = useState(null);
+  const [mobile, setMobile] = useState(localStorage.getItem('mobileNo'));
   let isUserOrAdmin = false;
   let isCashierOrAdmin = false;
 
   const roles = JSON.parse(localStorage.getItem('roles') || '[]');
-  console.log("roles is " + roles);
   isUserOrAdmin = roles.includes('USER') || roles.includes('ADMIN');
   isCashierOrAdmin = roles.includes('CASHIER') || roles.includes('ADMIN');
 
@@ -19,6 +19,7 @@ export default function Navbar() {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('authToken');
     localStorage.removeItem('roles');
+    localStorage.removeItem('mobileNo');
     window.location = '/login';
   };
 
@@ -62,22 +63,27 @@ export default function Navbar() {
     fetchLatestBtcRate();
   }, []);
 
-  // Fetch BTC rate when the component mounts
   useEffect(() => {
-    fetchLatestBtcRate();
-  }, []);
+    console.log("Current isAuthenticated value:", isAuthenticated);
+    console.log("Current mobile value:", mobile);
+    setMobile(localStorage.getItem('mobileNo'));
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    console.log("Mobile number updated to:", mobile);
+  }, [mobile]);
 
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-warning text-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/rules">Home</Link>
+          <button className="navbar-toggler" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <Link className="navbar-brand ms-2" to="/rules">Home</Link>
           <div className="btc-rate-container">
             {isAuthenticated && <span className="btc-rate"><i className="bi bi-currency-rupee"></i> {btcQty}</span>}
           </div>
-          <button className="navbar-toggler ms-auto" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
           <div className={`collapse navbar-collapse justify-content-between`} id="navbarScroll">
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ '--bs-scroll-height': '100px' }}>
               {isAuthenticated ? (
@@ -129,11 +135,19 @@ export default function Navbar() {
                 </>
               )}
             </ul>
+            {/* Display mobile number only in mobile view */}
+            <div className="d-lg-none">
+              {mobile && (
+                <span className="mobile-number">
+                  {mobile.replace(/^"(.*)"$/, '$1')}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </nav>
       <div className="marquee-container">
-        <div className="marquee-text">🚀 Today's USDT Rate is {btcRate} 🚀</div>
+        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i> {btcRate} 🚀</div>
       </div>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={toggleSidebar}>&times;</button>

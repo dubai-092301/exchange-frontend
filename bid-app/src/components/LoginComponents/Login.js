@@ -30,6 +30,7 @@ const Login = () => {
                     localStorage.setItem('isAuthenticated', 'true');
                     localStorage.setItem('authToken', response.data.jwt);
                     localStorage.setItem('roles', JSON.stringify(response.data.roles));
+                    localStorage.setItem('mobile', JSON.stringify(response.data.mobilesNo));
                     window.location.href = "/rules";
                 }
             })
