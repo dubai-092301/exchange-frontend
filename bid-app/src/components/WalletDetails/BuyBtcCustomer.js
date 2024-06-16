@@ -91,9 +91,14 @@ export default function BuyBtcCustomer() {
     }
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(registrationId);
-    alert('Registration Id copied to clipboard');
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(registrationId);
+      alert('Registration Id copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      alert('Failed to copy Registration Id');
+    }
   };
 
   return (
@@ -117,13 +122,17 @@ export default function BuyBtcCustomer() {
                           <div className="accordion-body">
                             <div className="rounded d-flex align-items-left flex-column" style={{ backgroundColor: "#f8f9fa" }}>
                               <div>
-                                <p style= {{alignContent: "left"}}>Recharge Address:</p>
+                                <p style={{ alignContent: "left" }}>Recharge Address:</p>
                               </div>
                               <div className="ms-9" style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
-                                <p style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
+                                <strong style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
                                   {registrationId}
-                                  <i className="bi bi-clipboard" onClick={copyToClipboard} style={{ cursor: 'pointer', marginLeft: '10px' }}></i>
-                                </p>
+                                  <span onClick={copyToClipboard} style={{ cursor: 'pointer', marginLeft: '10px' }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-copy" viewBox="0 0 16 16">
+                                      <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                                    </svg>
+                                  </span>
+                                </strong>
                               </div>
                             </div>
                             <div className="rounded d-flex" style={{ backgroundColor: "#f8f9fa" }}>
