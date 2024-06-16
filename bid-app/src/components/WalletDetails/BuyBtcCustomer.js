@@ -8,6 +8,7 @@ export default function BuyBtcCustomer() {
   const [btcQty, setBtcQty] = useState(null);
   const [btcRate, setBtcRate] = useState(null);
   const [totalValue, setTotalValue] = useState(null);
+  const [registrationId] = useState('TCVC4E69Kpyxnr7eJmXE4V5tGumenAHib1LEASW'); // Updated Recharge Address
 
   const fetchLatestBtcRate = () => {
     fetch('http://exchange-btc.in:8080/getCurrentBtcRate', {
@@ -54,7 +55,7 @@ export default function BuyBtcCustomer() {
   }, [quantity, btcRate]);
 
   const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
+    setQuantity(Number(event.target.value));
   };
 
   const handleUtrNumberChange = (event) => {
@@ -90,11 +91,16 @@ export default function BuyBtcCustomer() {
     }
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(registrationId);
+    alert('Registration Id copied to clipboard');
+  };
+
   return (
     <>
       <Navbar />
       <div>
-        <section style={{ "backgroundColor": "#ffffcc" }}>
+        <section style={{ backgroundColor: "#ffffcc" }}>
           <div className="container py-5">
             <div className="card">
               <div className="card-body">
@@ -109,11 +115,22 @@ export default function BuyBtcCustomer() {
                         <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                           <Scanner />
                           <div className="accordion-body">
-                            <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
-                              <div className="col-md-4 p-2">Minimum Quantity :</div>
-                              <div className="col-md-8 p-2">100</div>
+                            <div className="rounded d-flex align-items-left flex-column" style={{ backgroundColor: "#f8f9fa" }}>
+                              <div>
+                                <p style= {{alignContent: "left"}}>Recharge Address:</p>
+                              </div>
+                              <div className="ms-9" style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
+                                <p style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
+                                  {registrationId}
+                                  <i className="bi bi-clipboard" onClick={copyToClipboard} style={{ cursor: 'pointer', marginLeft: '10px' }}></i>
+                                </p>
+                              </div>
                             </div>
-                            <div className="rounded d-flex" style={{ "backgroundColor": "#f8f9fa" }}>
+                            <div className="rounded d-flex" style={{ backgroundColor: "#f8f9fa" }}>
+                              <div className="col-md-4 p-2">Minimum Quantity</div>
+                              <div className="col-md-8 p-2">: 100</div>
+                            </div>
+                            <div className="rounded d-flex" style={{ backgroundColor: "#f8f9fa" }}>
                               <div className="col-md-2 p-2">USDT Rate :</div>
                               <div className="col-md-2 p-2">{btcRate}</div>
                               <div className="col-md-3 p-2">You will receive :</div>
