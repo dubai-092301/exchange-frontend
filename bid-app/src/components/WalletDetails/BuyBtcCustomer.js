@@ -98,10 +98,10 @@ export default function BuyBtcCustomer() {
     textArea.select();
     try {
       document.execCommand('copy');
-      alert('Registration Id copied to clipboard');
+      alert('Reacharge address copied');
     } catch (err) {
       console.error('Failed to copy: ', err);
-      alert('Failed to copy Registration Id');
+      alert('Failed to copy Recharge Address');
     }
     document.body.removeChild(textArea);
   };
