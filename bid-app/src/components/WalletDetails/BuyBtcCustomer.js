@@ -91,14 +91,19 @@ export default function BuyBtcCustomer() {
     }
   };
 
-  const copyToClipboard = async () => {
+  const copyToClipboard = () => {
+    const textArea = document.createElement("textarea");
+    textArea.value = registrationId;
+    document.body.appendChild(textArea);
+    textArea.select();
     try {
-      await navigator.clipboard.writeText(registrationId);
+      document.execCommand('copy');
       alert('Registration Id copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
       alert('Failed to copy Registration Id');
     }
+    document.body.removeChild(textArea);
   };
 
   return (
