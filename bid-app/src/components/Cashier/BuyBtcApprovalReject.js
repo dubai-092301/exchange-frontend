@@ -7,8 +7,8 @@ export default function BuyBtcApprovalReject() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState([]);
 
-  useEffect(() => {
-    // Fetch data from Spring Boot backend
+  const fetchData = () => {
+    setLoading(true);
     fetch('http://exchange-btc.in:8080/getApprovalRecords', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -24,6 +24,10 @@ export default function BuyBtcApprovalReject() {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   if (loading) {
@@ -64,6 +68,7 @@ export default function BuyBtcApprovalReject() {
       .then(response => {
         if (response.ok) {
           alert(isApproved ? 'Approved successfully' : 'Rejected successfully');
+          fetchData(); // Fetch the latest data after action
         } else {
           alert('Failed to process request');
         }
