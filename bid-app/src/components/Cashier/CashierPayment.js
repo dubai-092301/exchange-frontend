@@ -17,6 +17,7 @@ export default function CashierPayment() {
     if (phoneNumberParam) {
       setPhoneNumber(phoneNumberParam);
       fetchBankDetails(phoneNumberParam);
+      fetchBtcQty(phoneNumberParam); // Fetch BTC quantity when the phone number is available
     }
   }, [location.search]);
 
@@ -47,7 +48,7 @@ export default function CashierPayment() {
       }
     }).then(response => response.json())
       .then(data => {
-        console.log("Response Data:", data);
+
         if (data.active !== undefined) {
           if (data.active) {
             setBankDetails(data);
@@ -60,6 +61,22 @@ export default function CashierPayment() {
       }).catch(error => {
         console.error('Error fetching bank details:', error);
         alert('An error occurred while fetching bank details.');
+      });
+  };
+
+  const fetchBtcQty = (phoneNumber) => {
+    fetch(`http://exchange-btc.in:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        setBtcQty(data);
+      })
+      .catch(error => {
+        console.error('Error fetching BTC quantity:', error);
       });
   };
 
@@ -80,7 +97,9 @@ export default function CashierPayment() {
         if (response.ok) {
           response.json().then(data => {
             alert('Payment successful.');
-            console.log(data);
+            fetchBtcQty(phoneNumber); // Refresh the balance after successful payment
+            setAmount(''); // Clear the amount input field
+            setUtrNumber(''); // Clear the UTR number input field
           });
         } else {
           alert('Failed to process payment.');
@@ -91,24 +110,6 @@ export default function CashierPayment() {
       });
     }
   };
-
-  useEffect(() => {
-    if (phoneNumber) {
-      fetch(`http://exchange-btc.in:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          setBtcQty(data);
-        })
-        .catch(error => {
-          console.error('Error fetching BTC quantity:', error);
-        });
-    }
-  }, [phoneNumber]);
 
   return (
     <>
