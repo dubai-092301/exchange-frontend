@@ -127,6 +127,9 @@ export default function BuyBtcCustomer() {
                           <div className="accordion-body">
                             <div className="rounded d-flex align-items-left flex-column" style={{ backgroundColor: "#f8f9fa" }}>
                               <div>
+                                <p>* Please open only in TRX network.</p>
+                              </div>
+                              <div>
                                 <p style={{ alignContent: "left" }}>Recharge Address:</p>
                               </div>
                               <div className="ms-9" style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
@@ -140,7 +143,6 @@ export default function BuyBtcCustomer() {
                                 </strong>
                               </div>
                             </div>
-                            <p>Please open only in TRX network.</p>
                             <div className="rounded d-flex" style={{ backgroundColor: "#f8f9fa" }}>
                               <div className="col-md-4 p-2">Minimum Quantity</div>
                               <div className="col-md-8 p-2">: 100</div>
