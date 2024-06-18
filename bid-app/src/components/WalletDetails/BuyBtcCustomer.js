@@ -140,6 +140,7 @@ export default function BuyBtcCustomer() {
                                 </strong>
                               </div>
                             </div>
+                            <p>Please open only in TRX network.</p>
                             <div className="rounded d-flex" style={{ backgroundColor: "#f8f9fa" }}>
                               <div className="col-md-4 p-2">Minimum Quantity</div>
                               <div className="col-md-8 p-2">: 100</div>
