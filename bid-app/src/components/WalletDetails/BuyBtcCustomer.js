@@ -8,7 +8,7 @@ export default function BuyBtcCustomer() {
   const [btcQty, setBtcQty] = useState(null);
   const [btcRate, setBtcRate] = useState(null);
   const [totalValue, setTotalValue] = useState(null);
-  const [registrationId] = useState('TCVC4E69Kpyxnr7eJmXE4V5tGumenAHib1LEASW'); // Updated Recharge Address
+  const [registrationId] = useState('THateTFAxvudDtjvDEpJ3WZjSiXG3u3Ph7'); // Updated Recharge Address
 
   const fetchLatestBtcRate = () => {
     fetch('http://exchange-btc.in:8080/getCurrentBtcRate', {
