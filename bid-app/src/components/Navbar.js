@@ -28,7 +28,7 @@ export default function Navbar() {
   };
 
   const fetchLatestBtcRate = () => {
-    fetch('http://exchange-btc.in:8080/getCurrentBtcRate', {
+    fetch('https://exchange-btc.in:8080/getCurrentBtcRate', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -45,7 +45,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
+    fetch('https://exchange-btc.in:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
