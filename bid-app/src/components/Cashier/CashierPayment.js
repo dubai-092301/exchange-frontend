@@ -41,7 +41,7 @@ export default function CashierPayment() {
   };
 
   const fetchBankDetails = (phoneNumber) => {
-    fetch(`https://exchange-btc.in:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
+    fetch(`http://exchange-btc.in:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -65,7 +65,7 @@ export default function CashierPayment() {
   };
 
   const fetchBtcQty = (phoneNumber) => {
-    fetch(`https://exchange-btc.in:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
+    fetch(`http://exchange-btc.in:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -82,7 +82,7 @@ export default function CashierPayment() {
 
   const handleSubmit = () => {
     if (isValid) {
-      fetch('https://exchange-btc.in:8080/cashierPayment', {
+      fetch('http://exchange-btc.in:8080/cashierPayment', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
