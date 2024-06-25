@@ -11,7 +11,7 @@ export default function BuyBtcCustomer() {
   const [registrationId] = useState('THateTFAxvudDtjvDEpJ3WZjSiXG3u3Ph7'); // Updated Recharge Address
 
   const fetchLatestBtcRate = () => {
-    fetch('https://exchange-btc.in:8080/getCurrentBtcRate', {
+    fetch('http://exchange-btc.in:8080/getCurrentBtcRate', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -29,7 +29,7 @@ export default function BuyBtcCustomer() {
   };
 
   useEffect(() => {
-    fetch('https://exchange-btc.in:8080/getAvailableBtcQty', {
+    fetch('http://exchange-btc.in:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -72,7 +72,7 @@ export default function BuyBtcCustomer() {
       formData.append('quantity', quantity);
       formData.append('utrNumber', utrNumber);
 
-      fetch('https://exchange-btc.in:8080/saveBtcRecords', {
+      fetch('http://exchange-btc.in:8080/saveBtcRecords', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -136,7 +136,7 @@ export default function BuyBtcCustomer() {
                                 <strong style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
                                   {registrationId}
                                   <span onClick={copyToClipboard} style={{ cursor: 'pointer', marginLeft: '10px' }}>
-                                    <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-copy" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-copy" viewBox="0 0 16 16">
                                       <path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
                                     </svg>
                                   </span>

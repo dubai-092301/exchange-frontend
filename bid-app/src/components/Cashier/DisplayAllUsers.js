@@ -8,7 +8,7 @@ export default function DisplayAllUsers() {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    fetch('https://exchange-btc.in:8080/unApprovedUsers', {
+    fetch('http://exchange-btc.in:8080/unApprovedUsers', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -9,7 +9,7 @@ export default function BuyBtcApprovalReject() {
 
   const fetchData = () => {
     setLoading(true);
-    fetch('https://exchange-btc.in:8080/getApprovalRecords', {
+    fetch('http://exchange-btc.in:8080/getApprovalRecords', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
       }
@@ -53,7 +53,7 @@ export default function BuyBtcApprovalReject() {
       return;
     }
 
-    fetch('https://exchange-btc.in:8080/approveOrRejectBtc', {
+    fetch('http://exchange-btc.in:8080/approveOrRejectBtc', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
