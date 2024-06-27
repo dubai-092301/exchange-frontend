@@ -1,6 +1,6 @@
 import './App.css';
 import Rules from './components/Rules';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DepositToWallet from './components/WalletDetails/BuyBtcCustomer';
 import ViewProfile from './components/ProfileComponents/ViewProfile';
@@ -21,6 +21,23 @@ import DisplayAllUsers from './components/Cashier/DisplayAllUsers';
 
 
 function App() {
+
+  useEffect(() => {
+    const disableRightClickAndF12 = (event) => {
+      if (event.type === 'contextmenu' || (event.type === 'keydown' && (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')))) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', disableRightClickAndF12);
+    document.addEventListener('keydown', disableRightClickAndF12);
+
+    return () => {
+      document.removeEventListener('contextmenu', disableRightClickAndF12);
+      document.removeEventListener('keydown', disableRightClickAndF12);
+    };
+  }, []);
+
   return (
     <>
     <BrowserRouter>   
