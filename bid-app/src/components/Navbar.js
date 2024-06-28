@@ -8,6 +8,8 @@ export default function Navbar() {
   const [btcRate, setBtcRate] = useState(null);
   const [btcQty, setBtcQty] = useState(null);
   const [mobile, setMobile] = useState(localStorage.getItem('mobile'));
+  const [username, setUsername] = useState(localStorage.getItem('usersName')); // State for username
+  const [showBankDetailsWarning, setShowBankDetailsWarning] = useState(false);
   let isUserOrAdmin = false;
   let isCashierOrAdmin = false;
 
@@ -20,6 +22,7 @@ export default function Navbar() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('roles');
     localStorage.removeItem('mobile');
+    localStorage.removeItem('usersName');
     window.location = '/login';
   };
 
@@ -64,10 +67,24 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobile(localStorage.getItem('mobile'));
+    setUsername(localStorage.getItem('usersName')); // Update username state
   }, [isAuthenticated]);
 
   useEffect(() => {
-  }, [mobile]);
+    fetch('https://exchange-btc.in:8080/getLatestApprovedOrRejectedRecords', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        setShowBankDetailsWarning(data);
+      })
+      .catch(error => {
+        console.error('Error fetching latest approved or rejected records:', error);
+      });
+  }, []);
 
   return (
     <>
@@ -131,11 +148,12 @@ export default function Navbar() {
                 </>
               )}
             </ul>
-            {/* Display mobile number only in mobile view */}
+            {/* Display mobile number and username only in mobile view */}
             <div className="d-lg-none">
               {mobile && (
                 <span className="mobile-number">
-                  {mobile.replace(/^"(.*)"$/, '$1')}
+                  {mobile.replace(/^"(.*)"$/, '$1')} <br />
+                  {username.replace(/^"(.*)"$/, '$1')}
                 </span>
               )}
             </div>
@@ -143,14 +161,20 @@ export default function Navbar() {
         </div>
       </nav>
       <div className="marquee-container">
-        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀</div>
+        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀. For any queries please contact us on whatsapp +44-1450420091.</div>
       </div>
+      {showBankDetailsWarning && (
+        <div className="marquee-container">
+          <div className="marquee-text-bank">Your bank details are incorrect. Please enter correct details.</div>
+        </div>
+      )}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={toggleSidebar}>&times;</button>
         <ul className="navbar-nav">
           {mobile && (
             <li className="nav-item mobile-number">
               <span>{mobile.replace(/^"(.*)"$/, '$1')}</span>
+              {username && <span><br />{username.replace(/^"(.*)"$/, '$1')}</span>} {/* Display username on a new line */}
             </li>
           )}
           {isAuthenticated ? (

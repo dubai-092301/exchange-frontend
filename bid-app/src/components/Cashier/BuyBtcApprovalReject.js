@@ -6,6 +6,7 @@ export default function BuyBtcApprovalReject() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState([]);
+  const [personNames, setPersonNames] = useState({});
 
   const fetchData = () => {
     setLoading(true);
@@ -19,11 +20,32 @@ export default function BuyBtcApprovalReject() {
         setData(data);
         setFilteredData(data); // Initially set filteredData to all data
         setLoading(false);
+        fetchPersonNames(data);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
+  };
+
+  const fetchPersonNames = (data) => {
+    const names = {};
+    data.forEach(item => {
+      const phoneNumber = item.phoneNumber;
+      fetch(`https://exchange-btc.in:8080/getPersonName?phoneNumber=${encodeURIComponent(phoneNumber)}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+      })
+        .then(response => response.text())
+        .then(name => {
+          names[phoneNumber] = name;
+          setPersonNames({ ...names });
+        })
+        .catch(error => {
+          console.error('Error fetching person name:', error);
+        });
+    });
   };
 
   useEffect(() => {
@@ -101,7 +123,11 @@ export default function BuyBtcApprovalReject() {
           <tbody>
             {filteredData.map(item => (
               <tr key={item.id}>
-                <td>{item.phoneNumber}</td>
+                <td>
+                  {item.phoneNumber}
+                  <br />
+                  {personNames[item.phoneNumber] || 'Loading...'}
+                </td>
                 <td>{item.utrNumber}</td>
                 <td>{item.buyAmount}</td>
                 <td>

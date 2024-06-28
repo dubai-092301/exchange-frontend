@@ -177,7 +177,7 @@ export default function WithdrawBtc() {
                         </h4>
                         <p></p>
                         <p className="mx-3">
-                          * कृपया या तो बैंक खाता विवरण या UPI आईडी दर्ज करें ।
+                          * कृपया या तो बैंक खाता विवरण करें ।
                         </p>
                         <hr />
                         <div
@@ -255,7 +255,7 @@ export default function WithdrawBtc() {
                                 disabled={!toggleEnabled}
                               />
                             </div>
-                            <hr />
+                            {/* <hr />
                             <div className="d-flex flex-wrap pb-3">
                               <div className="col-md-4 p-2">UPI Details: </div>
                               <input
@@ -267,7 +267,7 @@ export default function WithdrawBtc() {
                                 onChange={handleInputChange}
                                 disabled={!toggleEnabled}
                               />
-                            </div>
+                            </div> */}
                             <hr />
                             <div className="d-flex flex-wrap pb-3">
                               <input

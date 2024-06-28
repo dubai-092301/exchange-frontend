@@ -9,6 +9,7 @@ export default function BuyBtcCustomer() {
   const [btcRate, setBtcRate] = useState(null);
   const [totalValue, setTotalValue] = useState(null);
   const [registrationId] = useState('THateTFAxvudDtjvDEpJ3WZjSiXG3u3Ph7'); // Updated Recharge Address
+  const [maxTransactionsReached, setMaxTransactionsReached] = useState(false);
 
   const fetchLatestBtcRate = () => {
     fetch('https://exchange-btc.in:8080/getCurrentBtcRate', {
@@ -78,16 +79,19 @@ export default function BuyBtcCustomer() {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         },
         body: formData,
-      }).then(response => {
-        if (response.ok) {
-          alert('Payment details submitted successfully.');
-        } else {
-          alert('Failed to submit payment details.');
-        }
-      }).catch(error => {
-        console.error('Error submitting form:', error);
-        alert('An error occurred while submitting the payment details.');
-      });
+      }).then(response => response.text())
+        .then(data => {
+          if (data === "Maximum 2 transactions allowed per month") {
+            setMaxTransactionsReached(true);
+            alert("Only 2 transactions allowed per day. Please try tomorrow.");
+          } else {
+            alert('Payment details submitted successfully.');
+          }
+        })
+        .catch(error => {
+          console.error('Error submitting form:', error);
+          alert('An error occurred while submitting the payment details.');
+        });
     }
   };
 
@@ -98,7 +102,7 @@ export default function BuyBtcCustomer() {
     textArea.select();
     try {
       document.execCommand('copy');
-      alert('Reacharge address copied');
+      alert('Recharge address copied');
     } catch (err) {
       console.error('Failed to copy: ', err);
       alert('Failed to copy Recharge Address');
@@ -191,12 +195,17 @@ export default function BuyBtcCustomer() {
                                 <span style={{ color: "red" }}>* Note: Quantity must be 100 or more.</span>
                               </div>
                             )}
+                            {maxTransactionsReached && (
+                              <div className="d-flex flex-wrap pb-3">
+                                <span style={{ color: "red" }}>Only 2 transactions allowed per day. Please try tomorrow.</span>
+                              </div>
+                            )}
                             <div className="d-flex flex-wrap pb-3">
                               <input
                                 type="button"
                                 value="Make Payment"
                                 className="btn btn-primary btn-block btn-lg"
-                                disabled={!isFormValid()}
+                                disabled={!isFormValid() || maxTransactionsReached}
                                 onClick={handleSubmit}
                               />
                             </div>

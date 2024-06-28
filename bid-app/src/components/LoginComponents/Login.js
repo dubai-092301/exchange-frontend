@@ -7,6 +7,7 @@ const Login = () => {
         phoneNumber: '',
         password: ''
     });
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         document.body.classList.add(styles.bodyBackground);
@@ -31,6 +32,8 @@ const Login = () => {
                     localStorage.setItem('authToken', response.data.jwt);
                     localStorage.setItem('roles', JSON.stringify(response.data.roles));
                     localStorage.setItem('mobile', JSON.stringify(response.data.mobilesNo));
+                    localStorage.setItem('usersName', JSON.stringify(response.data.usersName));
+                    setUsername(response.data.usersName); // Set username state
                     window.location.href = "/rules";
                 }
             })
@@ -69,6 +72,8 @@ const Login = () => {
                     <button type="submit" className={styles.confirmBtn}>Login</button>
                 </form>
                 <p className={styles.registerLink}>If you are not registered, please <a href="/">sign up here</a>.</p>
+                {/* Display username and mobile */}
+                {username && <p>Welcome, {username}. Your mobile number is {localStorage.getItem('mobile')}.</p>}
             </div>
         </div>
     );
