@@ -161,7 +161,7 @@ export default function Navbar() {
         </div>
       </nav>
       <div className="marquee-container">
-        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀. For any queries please contact us on whatsapp +44-1450420091.</div>
+        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀.</div>
       </div>
       {showBankDetailsWarning && (
         <div className="marquee-container">
@@ -227,6 +227,10 @@ export default function Navbar() {
           )}
         </ul>
       </div>
+      {/* Footer Message */}
+      <footer className="footer-message">
+        For any queries please contact us on WhatsApp +44-1450420091. Please reach out between 10am to 6pm. 
+      </footer>
     </>
   );
 }
