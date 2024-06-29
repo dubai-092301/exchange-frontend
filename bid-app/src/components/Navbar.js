@@ -163,11 +163,11 @@ export default function Navbar() {
       <div className="marquee-container">
         <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀</div>
       </div>
-      {showBankDetailsWarning && (
+      {/* {showBankDetailsWarning && (
         <div className="marquee-container">
           <div className="marquee-text-bank">Your bank details are incorrect. Please enter correct details.</div>
         </div>
-      )}
+      )} */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={toggleSidebar}>&times;</button>
         <ul className="navbar-nav">
