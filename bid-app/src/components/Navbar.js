@@ -71,7 +71,7 @@ export default function Navbar() {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    fetch('https://exchange-btc.in:8080/getLatestApprovedOrRejectedRecords', {
+    fetch('https://exchange-btc.in:8080/getUserBankDetails', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`

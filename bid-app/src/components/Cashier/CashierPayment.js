@@ -48,7 +48,6 @@ export default function CashierPayment() {
       }
     }).then(response => response.json())
       .then(data => {
-
         if (data.active !== undefined) {
           if (data.active) {
             setBankDetails(data);
@@ -107,6 +106,31 @@ export default function CashierPayment() {
       }).catch(error => {
         console.error('Error making payment:', error);
         alert('An error occurred while making the payment.');
+      });
+    }
+  };
+
+  const rejectSubmit = () => {
+    if (phoneNumber) { // Ensure phone number is available for the request
+      fetch('https://exchange-btc.in:8080/deactivateBankDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        },
+        body: JSON.stringify({ phoneNumber: phoneNumber }) // Include the phone number to identify the bank details
+      }).then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            alert('Rejected successfully.');
+            fetchBankDetails(phoneNumber); // Refresh the bank details after rejection
+          });
+        } else {
+          alert('Failed to reject bank details.');
+        }
+      }).catch(error => {
+        console.error('Error rejecting bank details:', error);
+        alert('An error occurred while rejecting the bank details.');
       });
     }
   };
@@ -183,6 +207,14 @@ export default function CashierPayment() {
             className="btn btn-primary btn-block btn-lg"
             disabled={!isValid}
             onClick={handleSubmit}
+          />
+        </div>
+        <div className="d-flex flex-wrap pb-3">
+          <input
+            type="button"
+            value="Reject"
+            className="btn btn-primary btn-block btn-lg"
+            onClick={rejectSubmit}
           />
         </div>
       </div>
