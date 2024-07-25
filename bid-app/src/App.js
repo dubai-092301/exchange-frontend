@@ -17,26 +17,29 @@ import ChangePassword from './components/PasswordComponents/ChangePassword';
 import Register from './components/RegisterComponent/Register';
 import CashierPayment from './components/Cashier/CashierPayment';
 import DisplayAllUsers from './components/Cashier/DisplayAllUsers';
+import NominatedUsers from './components/NominateUsers/NominatedUsers';
+import NomineesSuggestions from './components/NominateUsers/NomineesSuggestions';
+import NominateUser from './components/NominateUsers/NominateUser';
 
 
 
 function App() {
 
-  useEffect(() => {
-    const disableRightClickAndF12 = (event) => {
-      if (event.type === 'contextmenu' || (event.type === 'keydown' && (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')))) {
-        event.preventDefault();
-      }
-    };
+  // useEffect(() => {
+  //   const disableRightClickAndF12 = (event) => {
+  //     if (event.type === 'contextmenu' || (event.type === 'keydown' && (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')))) {
+  //       event.preventDefault();
+  //     }
+  //   };
 
-    document.addEventListener('contextmenu', disableRightClickAndF12);
-    document.addEventListener('keydown', disableRightClickAndF12);
+  //   document.addEventListener('contextmenu', disableRightClickAndF12);
+  //   document.addEventListener('keydown', disableRightClickAndF12);
 
-    return () => {
-      document.removeEventListener('contextmenu', disableRightClickAndF12);
-      document.removeEventListener('keydown', disableRightClickAndF12);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('contextmenu', disableRightClickAndF12);
+  //     document.removeEventListener('keydown', disableRightClickAndF12);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -53,8 +56,12 @@ function App() {
         <Route exact path = '/profile' element = {<Profile/>}></Route>
         <Route exact path = '/configure-btc-rate' element = {<ConfigureBtcRate/>}></Route>
         <Route exact path = '/cashier-payment' element = {<CashierPayment/>}></Route>
-        <Route path="/" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+
+        <Route exact path = '/nominate-user' element = {<NominateUser/>}></Route>
+        <Route exact path = '/nominated-users' element = {<NominatedUsers/>}></Route>
+        <Route exact path = '/nominees-suggestions' element = {<NomineesSuggestions/>}></Route>
+
+        <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/display-all-users" element={<DisplayAllUsers />} />

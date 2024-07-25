@@ -81,10 +81,10 @@ export default function ViewTransactions() {
                 <table className='table table-bordered table-hover'>
                     <thead>
                         <tr>
+                            <th>Transaction Number</th>
                             <th>Date</th>
-                            <th>UTR Number</th>
+                            <th>Narration</th>
                             <th>Amount</th>
-                            <th>Status</th>
                             <th>Type</th>
                         </tr>
                     </thead>

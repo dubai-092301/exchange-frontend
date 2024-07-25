@@ -48,7 +48,7 @@ const Login = () => {
                 <h2>Login</h2>
                 <form onSubmit={loginUser}>
                     <div className={styles.formGroup}>
-                        <label htmlFor="phoneNumber">Phone Number</label>
+                        <label htmlFor="phoneNumber">User Id</label>
                         <input 
                             type="text" 
                             id="phoneNumber" 
@@ -71,7 +71,7 @@ const Login = () => {
                     </div>
                     <button type="submit" className={styles.confirmBtn}>Login</button>
                 </form>
-                <p className={styles.registerLink}>If you are not registered, please <a href="/">sign up here</a>.</p>
+                <p className={styles.registerLink}><a href="/">Forgot Password?</a></p>
                 {/* Display username and mobile */}
                 {username && <p>Welcome, {username}. Your mobile number is {localStorage.getItem('mobile')}.</p>}
             </div>

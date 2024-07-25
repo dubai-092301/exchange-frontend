@@ -88,7 +88,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-warning text-dark">
+      <nav className="navbar navbar-expand-lg text-dark">
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" onClick={toggleSidebar} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -103,34 +103,69 @@ export default function Navbar() {
                 <>
                   {isUserOrAdmin && (
                     <>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/buy-btc">Usdt Deposit</Link>
+                      <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Services
+                        </a>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a className="dropdown-item" href="/view-transactions">Statement</a></li>
+                          <li><a className="dropdown-item" href="#">Balance</a></li>
+                          <li><a className="dropdown-item" href="#">Send Money</a></li>
+                        </ul>
                       </li>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/withdraw-btc">Bank Details</Link>
+                      
+                      {/* Investments */}
+                      <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Investments
+                        </a>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a className="dropdown-item" href="/withdraw-btc">Investment Plans</a></li>
+                          <li><a className="dropdown-item" href="#">Fixed Term Deposit.</a></li>
+                          <li><a className="dropdown-item" href="#">Mutual Funds</a></li>
+                          <li><a className="dropdown-item" href="#">ETF</a></li>
+                          <li><a className="dropdown-item" href="#">Invested Funds</a></li>
+                        </ul>
                       </li>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/view-transactions">Account Statement</Link>
+
+                      {/* loans   */}
+                      <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Loans
+                        </a>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a className="dropdown-item" href="/withdraw-btc">Home Loan</a></li>
+                          <li><a className="dropdown-item" href="#">Personal Loan</a></li>
+                          <li><a className="dropdown-item" href="#">Vehicle Loan</a></li>
+                        </ul>
                       </li>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/rules">Rules</Link>
+
+                      {/* DASHBOARD */}
+                      <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dashboards
+                        </a>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a className="dropdown-item" href="/withdraw-btc">Overall Dashboard</a></li>
+                          <li><a className="dropdown-item" href="#">Expenses Dashboard</a></li>
+                          <li><a className="dropdown-item" href="#">Investment Dashboard</a></li>
+                        </ul>
                       </li>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/profile">Password Change</Link>
+
+                      {/* <li className="nav-item">
+                        <Link className="nav-link active" to="/profile">Nominate Users</Link>
+                      </li> */}
+                      <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Nominate Users
+                        </a>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a className="dropdown-item" href="/nominate-user">Nominate User</a></li>
+                          <li><a className="dropdown-item" href="/nominated-users">Nominated Users</a></li>
+                          <li><a className="dropdown-item" href="/nominees-suggestions">Suggestions By Users</a></li>
+                        </ul>
                       </li>
-                    </>
-                  )}
-                  {isCashierOrAdmin && (
-                    <>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/buy-btc-approval-reject">Approve</Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/configure-btc-rate">Configure USDT</Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link className="nav-link active" to="/display-all-users">Make Payment to Pending</Link>
-                      </li>
+
                     </>
                   )}
                   <li className="nav-item">
@@ -160,76 +195,9 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <div className="marquee-container">
-        <div className="marquee-text">🚀 Today's USDT Rate is <i className="bi bi-currency-rupee"></i>{btcRate} 🚀</div>
-      </div>
-      {/* {showBankDetailsWarning && (
-        <div className="marquee-container">
-          <div className="marquee-text-bank">Your bank details are incorrect. Please enter correct details.</div>
-        </div>
-      )} */}
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <button className="close-btn" onClick={toggleSidebar}>&times;</button>
-        <ul className="navbar-nav">
-          {mobile && (
-            <li className="nav-item mobile-number">
-              <span>{mobile.replace(/^"(.*)"$/, '$1')}</span>
-              {username && <span><br />{username.replace(/^"(.*)"$/, '$1')}</span>} {/* Display username on a new line */}
-            </li>
-          )}
-          {isAuthenticated ? (
-            <>
-              {isUserOrAdmin && (
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/buy-btc" onClick={toggleSidebar}>Usdt Deposit</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/withdraw-btc" onClick={toggleSidebar}>Bank Details</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/view-transactions" onClick={toggleSidebar}>Account Statement</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/rules" onClick={toggleSidebar}>Rules</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/profile" onClick={toggleSidebar}>Password Change</Link>
-                  </li>
-                </>
-              )}
-              {isCashierOrAdmin && (
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/buy-btc-approval-reject" onClick={toggleSidebar}>Approve</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/configure-btc-rate" onClick={toggleSidebar}>Configure USDT</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/display-all-users" onClick={toggleSidebar}>Make Payment to Pending</Link>
-                  </li>
-                </>
-              )}
-              <li className="nav-item">
-                <button className="nav-link btn" onClick={() => { handleLogout(); toggleSidebar(); }}>Logout</button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link className="nav-link" to="/" onClick={toggleSidebar}>Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/register" onClick={toggleSidebar}>SignUp</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
       {/* Footer Message */}
       <footer className="footer-message">
-        For any queries please contact us on WhatsApp +44-1450420091 between 10 AM to 6 PM. 
+        Investments are based on person risk. We do not guarantee the returns provided but we try our best to reach the goals. 
       </footer>
     </>
   );
