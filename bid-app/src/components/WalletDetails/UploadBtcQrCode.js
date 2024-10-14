@@ -12,7 +12,7 @@ export default function UploadBtcQrCode() {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://172.31.7.181:8080/upload', formData, {
+            const response = await axios.post('http://3.25.226.92:8080/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('authToken')}`

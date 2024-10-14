@@ -14,7 +14,7 @@ export default function WithdrawBtc() {
 
   useEffect(() => {
     // Fetch available BTC quantity when the component mounts
-    fetch('http://172.31.7.181:8080/getAvailableBtcQty', {
+    fetch('http://3.25.226.92:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -31,7 +31,7 @@ export default function WithdrawBtc() {
     // Fetch user bank details when the component mounts
     const phoneNumber = localStorage.getItem('authToken');
     if (phoneNumber) {
-      fetch(`http://172.31.7.181:8080/getThisUserBankDetails`, {
+      fetch(`http://3.25.226.92:8080/getThisUserBankDetails`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -85,7 +85,7 @@ export default function WithdrawBtc() {
     if (isWithdrawButtonEnabled()) {
       if (!toggleEnabled) {
         // Call API to deactivate bank details
-        fetch('http://172.31.7.181:8080/deactivateBankDetails', {
+        fetch('http://3.25.226.92:8080/deactivateBankDetails', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export default function WithdrawBtc() {
         const updatedBankDetails = { ...bankDetails, isActive: true };
 
         // Proceed with normal withdrawal
-        fetch('http://172.31.7.181:8080/saveBtcWithdrawRecords', {
+        fetch('http://3.25.226.92:8080/saveBtcWithdrawRecords', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function WithdrawBtc() {
 
     if (!newToggleState) {
       // Call API to deactivate bank details
-      fetch('http://172.31.7.181:8080/deactivateBankDetails', {
+      fetch('http://3.25.226.92:8080/deactivateBankDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

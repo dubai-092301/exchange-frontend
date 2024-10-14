@@ -24,7 +24,7 @@ const Register = () => {
     const registerUser = (e) => {
         e.preventDefault();
         console.log('we are registering the details');
-        axios.post('http://172.31.7.181:8080/api/client/auth/register/', {
+        axios.post('http://3.25.226.92:8080/api/client/auth/register/', {
             name: user.name,
             password: user.password,
             phoneNumber: user.phoneNumber,

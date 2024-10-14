@@ -41,7 +41,7 @@ export default function CashierPayment() {
   };
 
   const fetchBankDetails = (phoneNumber) => {
-    fetch(`http://172.31.7.181:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
+    fetch(`http://3.25.226.92:8080/getUserBankDetails?phoneNumber=${phoneNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -64,7 +64,7 @@ export default function CashierPayment() {
   };
 
   const fetchBtcQty = (phoneNumber) => {
-    fetch(`http://172.31.7.181:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
+    fetch(`http://3.25.226.92:8080/getAvailableBtcQtyForPhoneNumber?phoneNumber=${phoneNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -81,7 +81,7 @@ export default function CashierPayment() {
 
   const handleSubmit = () => {
     if (isValid) {
-      fetch('http://172.31.7.181:8080/cashierPayment', {
+      fetch('http://3.25.226.92:8080/cashierPayment', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -112,7 +112,7 @@ export default function CashierPayment() {
 
   const rejectSubmit = () => {
     if (phoneNumber) { // Ensure phone number is available for the request
-      fetch('http://172.31.7.181:8080/deactivateBankDetails', {
+      fetch('http://3.25.226.92:8080/deactivateBankDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
