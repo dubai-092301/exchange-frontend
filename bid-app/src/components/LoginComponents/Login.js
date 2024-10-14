@@ -23,6 +23,7 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
+        console.log('We are calling http://172.31.7.181:8080/api/client/auth/login/');
         axios.post('http://172.31.7.181:8080/api/client/auth/login/', credentials)
             .then(response => {
                 if (response.data.status === 'failed') {
