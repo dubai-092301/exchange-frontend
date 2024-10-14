@@ -26,7 +26,7 @@ const ChangePassword = () => {
     };
 
     const requestOTP = () => {
-        axios.get(`http://3.25.226.92:8080/api/client/auth/requestOtp/${passwordData.phoneNumber}`)
+        axios.get(`https://exchange-btc.in:8080/api/client/auth/requestOtp/${passwordData.phoneNumber}`)
             .then(response => {
                 alert('OTP sent to your phone.');
             })
@@ -35,7 +35,7 @@ const ChangePassword = () => {
 
     const changePassword = (e) => {
         e.preventDefault();
-        axios.post('http://3.25.226.92:8080/api/client/auth/changePassword/', {
+        axios.post('https://exchange-btc.in:8080/api/client/auth/changePassword/', {
             phoneNumber: passwordData.phoneNumber,
             newPassword: passwordData.newPassword,
             otp: passwordData.otp

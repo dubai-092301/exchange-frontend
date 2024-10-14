@@ -23,8 +23,8 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
-        console.log('We are calling http://3.25.226.92:8080/api/client/auth/login/');
-        axios.post('http://3.25.226.92:8080/api/client/auth/login/', credentials)
+        console.log('We are calling https://exchange-btc.in:8080/api/client/auth/login/');
+        axios.post('https://exchange-btc.in:8080/api/client/auth/login/', credentials)
             .then(response => {
                 if (response.data.status === 'failed') {
                     alert(response.data.message);
