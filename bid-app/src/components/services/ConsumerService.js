@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CONSUMER_API_BASE_URL = "http://localhost:8080/api/v1/btc";
+const CONSUMER_API_BASE_URL = "http://172.31.7.181:8080/api/v1/btc";
 
 class ConsumerService {
 

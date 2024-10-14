@@ -12,7 +12,7 @@ export default function BuyBtcCustomer() {
   const [maxTransactionsReached, setMaxTransactionsReached] = useState(false);
 
   const fetchLatestBtcRate = () => {
-    fetch('http://localhost:8080/getCurrentBtcRate', {
+    fetch('http://172.31.7.181:8080/getCurrentBtcRate', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -30,7 +30,7 @@ export default function BuyBtcCustomer() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/getAvailableBtcQty', {
+    fetch('http://172.31.7.181:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -73,7 +73,7 @@ export default function BuyBtcCustomer() {
       formData.append('quantity', quantity);
       formData.append('utrNumber', utrNumber);
 
-      fetch('http://localhost:8080/saveBtcRecords', {
+      fetch('http://172.31.7.181:8080/saveBtcRecords', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`

@@ -9,7 +9,7 @@ export default function DisplayAllUsers() {
   const [personNames, setPersonNames] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:8080/unApprovedUsers', {
+    fetch('http://172.31.7.181:8080/unApprovedUsers', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default function DisplayAllUsers() {
     const names = {};
     data.forEach(item => {
       const phoneNumber = item.phoneNumber;
-      fetch(`http://localhost:8080/getPersonName?phoneNumber=${encodeURIComponent(phoneNumber)}`, {
+      fetch(`http://172.31.7.181:8080/getPersonName?phoneNumber=${encodeURIComponent(phoneNumber)}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }

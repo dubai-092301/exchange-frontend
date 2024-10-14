@@ -31,7 +31,7 @@ export default function Navbar() {
   };
 
   const fetchLatestBtcRate = () => {
-    fetch('http://localhost:8080/getCurrentBtcRate', {
+    fetch('http://172.31.7.181:8080/getCurrentBtcRate', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -48,7 +48,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/getAvailableBtcQty', {
+    fetch('http://172.31.7.181:8080/getAvailableBtcQty', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -71,7 +71,7 @@ export default function Navbar() {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/getUserBankDetails', {
+    fetch('http://172.31.7.181:8080/getUserBankDetails', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
