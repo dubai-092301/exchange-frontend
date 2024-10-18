@@ -134,7 +134,7 @@ export default function BuyBtcCustomer() {
                                 <p style={{color: 'red'}}>* Only supports TRX network.</p>
                               </div> */}
                               <div>
-                                <p style={{ alignContent: "left" }}>Recharge Address:</p>
+                                <p style={{ alignContent: "left" }}>Recharge Address: TL7XQoontZMotDVajLQ9b9dbmBiZkMVKEV</p>
                               </div>
                               {/* <div className="ms-9" style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
                                 <strong style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
