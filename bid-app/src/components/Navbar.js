@@ -229,7 +229,7 @@ export default function Navbar() {
       </div>
       {/* Footer Message */}
       <footer className="footer-message">
-        For any queries please contact us on WhatsApp +61279081752 between 10 AM to 6 PM. 
+        For any queries please contact us on WhatsApp +61-279081752 between 10 AM to 6 PM. 
       </footer>
     </>
   );
