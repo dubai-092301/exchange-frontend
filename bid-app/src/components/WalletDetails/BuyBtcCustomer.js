@@ -8,7 +8,7 @@ export default function BuyBtcCustomer() {
   const [btcQty, setBtcQty] = useState(null);
   const [btcRate, setBtcRate] = useState(null);
   const [totalValue, setTotalValue] = useState(null);
-  const [registrationId] = useState('THateTFAxvudDtjvDEpJ3WZjSiXG3u3Ph7'); // Updated Recharge Address
+  const [registrationId] = useState('TL7XQoontZMotDVajLQ9b9dbmBiZkMVKEV'); // Updated Recharge Address
   const [maxTransactionsReached, setMaxTransactionsReached] = useState(false);
 
   const fetchLatestBtcRate = () => {
@@ -134,9 +134,9 @@ export default function BuyBtcCustomer() {
                                 <p style={{color: 'red'}}>* Only supports TRX network.</p>
                               </div> */}
                               <div>
-                                <p style={{ alignContent: "left" }}>Recharge Address: TL7XQoontZMotDVajLQ9b9dbmBiZkMVKEV</p>
+                                <p style={{ alignContent: "left" }}>Recharge Address:</p>
                               </div>
-                              {/* <div className="ms-9" style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
+                              <div className="ms-9" style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
                                 <strong style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', marginBottom: '10px' }}>
                                   {registrationId}
                                   <span onClick={copyToClipboard} style={{ cursor: 'pointer', marginLeft: '10px' }}>
@@ -145,7 +145,7 @@ export default function BuyBtcCustomer() {
                                     </svg>
                                   </span>
                                 </strong>
-                              </div> */}
+                              </div>
                             </div>
                             <div className="rounded d-flex" style={{ backgroundColor: "#f8f9fa" }}>
                               <div className="col-md-4 p-2">Minimum Quantity</div>
