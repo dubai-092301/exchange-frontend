@@ -130,9 +130,9 @@ export default function BuyBtcCustomer() {
                           <Scanner />
                           <div className="accordion-body">
                             <div className="rounded d-flex align-items-left flex-column" style={{ backgroundColor: "#f8f9fa" }}>
-                              <div>
+                              {/* <div>
                                 <p style={{color: 'red'}}>* Only supports TRX network.</p>
-                              </div>
+                              </div> */}
                               <div>
                                 <p style={{ alignContent: "left" }}>Recharge Address:</p>
                               </div>
@@ -176,7 +176,7 @@ export default function BuyBtcCustomer() {
                                 type="number"
                                 className="form-control"
                                 placeholder="Quantity"
-                                value={quantity}
+                                value={quantity === 0 ? '' : quantity}
                                 onChange={handleQuantityChange}
                               ></input>
                             </div>
