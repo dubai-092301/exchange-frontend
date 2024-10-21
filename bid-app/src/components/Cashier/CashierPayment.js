@@ -93,8 +93,6 @@ export default function CashierPayment() {
       .then(data => {
         if (data && data.referredBy) {
           setReferalCode(data.referredBy);
-        } else {
-          alert('Referral code not available for this phone number');
         }
       })
       .catch(error => {
