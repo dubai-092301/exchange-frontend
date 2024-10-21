@@ -41,19 +41,20 @@ const Register = () => {
     };
 
     const registerUser = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent the form from reloading the page
         setErrorMessage(null);
 
         if (!validateForm()) {
-            return;
+            return; // If the form is invalid, don't proceed
         }
 
-        console.log('we are registering the details');
+        console.log('Registering user details:', user); // Check in console if the button is working
+
         axios.post('https://exchange-btc.in:8080/api/client/auth/register/', {
             name: user.name,
             password: user.password,
             phoneNumber: user.phoneNumber,
-            referalCode: user.referalCode || null, // Handle optional field here
+            referalCode: user.referalCode || null, // Handle optional referral code
         })
         .then(response => {
             if (response.data.status === 'failed') {
