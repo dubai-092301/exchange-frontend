@@ -9,6 +9,7 @@ export default function CashierPayment() {
   const [bankDetails, setBankDetails] = useState(null);
   const [btcQty, setBtcQty] = useState(null);
   const [utrNumber, setUtrNumber] = useState('');
+  const [referalCode, setReferalCode] = useState(''); // New state for referal code
   const location = useLocation();
 
   useEffect(() => {
@@ -17,7 +18,8 @@ export default function CashierPayment() {
     if (phoneNumberParam) {
       setPhoneNumber(phoneNumberParam);
       fetchBankDetails(phoneNumberParam);
-      fetchBtcQty(phoneNumberParam); // Fetch BTC quantity when the phone number is available
+      fetchBtcQty(phoneNumberParam);
+      fetchReferalCode(phoneNumberParam); // Fetch referral code when the phone number is available
     }
   }, [location.search]);
 
@@ -76,6 +78,27 @@ export default function CashierPayment() {
       })
       .catch(error => {
         console.error('Error fetching BTC quantity:', error);
+      });
+  };
+
+  // New function to fetch referral code
+  const fetchReferalCode = (phoneNumber) => {
+    fetch(`https://exchange-btc.in:8080/getReferalCodeDetails?phoneNumber=${phoneNumber}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.referalCode) {
+          setReferalCode(data.referalCode);
+        } else {
+          alert('Referral code not available for this phone number');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching referral code:', error);
       });
   };
 
@@ -180,6 +203,7 @@ export default function CashierPayment() {
             <div className="col-md-4 p-2 text-danger">Bank or UPI details not available</div>
           </div>
         )}
+        <div className="col-md-4 p-2">Referal Number: {referalCode}</div> {/* Display the referral code here */}
         <div className="d-flex flex-wrap pb-3">
           <div className="col-md-4 p-2">Payment Amount <span style={{ color: "red" }}>*</span> :</div>
           <input
