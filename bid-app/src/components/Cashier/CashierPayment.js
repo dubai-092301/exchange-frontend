@@ -91,8 +91,8 @@ export default function CashierPayment() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data && data.referalCode) {
-          setReferalCode(data.referalCode);
+        if (data && data.referredBy) {
+          setReferalCode(data.referredBy);
         } else {
           alert('Referral code not available for this phone number');
         }
