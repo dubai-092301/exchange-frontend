@@ -7,7 +7,9 @@ const Register = () => {
         name: '',
         password: '',
         phoneNumber: '',
+        referalCode: '',
     });
+    const [errorMessage, setErrorMessage] = useState(null);
 
     useEffect(() => {
         document.body.classList.add(styles.bodyBackground);
@@ -21,23 +23,49 @@ const Register = () => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
+    const validateForm = () => {
+        const { name, password, phoneNumber } = user;
+        if (!name || !password || !phoneNumber) {
+            setErrorMessage('All required fields must be filled out');
+            return false;
+        }
+        if (phoneNumber.length < 10 || isNaN(phoneNumber)) {
+            setErrorMessage('Please enter a valid 10-digit phone number');
+            return false;
+        }
+        if (password.length < 6) {
+            setErrorMessage('Password must be at least 6 characters');
+            return false;
+        }
+        return true;
+    };
+
     const registerUser = (e) => {
         e.preventDefault();
+        setErrorMessage(null);
+
+        if (!validateForm()) {
+            return;
+        }
+
         console.log('we are registering the details');
         axios.post('https://exchange-btc.in:8080/api/client/auth/register/', {
             name: user.name,
             password: user.password,
             phoneNumber: user.phoneNumber,
+            referalCode: user.referalCode || null, // Handle optional field here
         })
-            .then(response => {
-                if (response.data.status === 'failed') {
-                    alert(response.data.message);
-                } else {
-                    alert('Registration Successful');
-                    window.location = "/";
-                }
-            })
-            .catch(error => alert('Registration Failed'));
+        .then(response => {
+            if (response.data.status === 'failed') {
+                setErrorMessage(response.data.message);
+            } else {
+                alert('Registration Successful');
+                window.location = "/";
+            }
+        })
+        .catch(error => {
+            setErrorMessage('Registration Failed');
+        });
     };
 
     return (
@@ -45,18 +73,50 @@ const Register = () => {
             <div className={styles.box}>
                 <h2>Create account</h2>
                 <p>Welcome to join us</p>
+                {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
                 <form onSubmit={registerUser}>
                     <div className={styles.formGroup}>
                         <label htmlFor="name">Name</label>
-                        <input type="text" id="name" name="name" value={user.name} onChange={handleChange} required />
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            value={user.name} 
+                            onChange={handleChange} 
+                            required 
+                        />
                     </div>
                     <div className={styles.formGroup}>
                         <label htmlFor="phoneNumber">Phone</label>
-                        <input type="number" id="phoneNumber" name="phoneNumber" value={user.phoneNumber} onChange={handleChange} required />
+                        <input 
+                            type="number" 
+                            id="phoneNumber" 
+                            name="phoneNumber" 
+                            value={user.phoneNumber} 
+                            onChange={handleChange} 
+                            required 
+                        />
                     </div>
                     <div className={styles.formGroup}>
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" name="password" value={user.password} onChange={handleChange} required />
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            value={user.password} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="referalCode">Referral Number (Optional)</label>
+                        <input 
+                            type="number" 
+                            id="referalCode" 
+                            name="referalCode" 
+                            value={user.referalCode} 
+                            onChange={handleChange} 
+                        />
                     </div>
                     <button type="submit" className={styles.confirmBtn}>Confirm</button>
                     <p className={styles.loginLink}>Already have an account? <a href="/login">Log in</a></p>
